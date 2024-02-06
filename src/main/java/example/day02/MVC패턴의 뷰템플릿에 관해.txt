@@ -1,0 +1,4 @@
+p.58 뷰 템플릿
+        - 웹 페이지[HTML] 를 하나의 틀로 만들고 변수를 삽입
+        (HTML자체에선 변수 기능이 없다. JS는 있긴 하다.)
+        - JSP, Mustache, Thymeleaf
