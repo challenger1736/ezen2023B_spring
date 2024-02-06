@@ -1,4 +1,9 @@
 p.58 뷰 템플릿
         - 웹 페이지[HTML] 를 하나의 틀로 만들고 변수를 삽입
         (HTML자체에선 변수 기능이 없다. JS는 있긴 하다.)
-        - JSP, Mustache, Thymeleaf
+        - JSP, Mustache, Thymeleaf 등등
+        1. 설치 : Dependencies
+        mustache 복사
+        2. 템플릿 문법
+            1. {{ 변수명 }}
+            2. {{> 폴더명/머스태치파일명 }}
