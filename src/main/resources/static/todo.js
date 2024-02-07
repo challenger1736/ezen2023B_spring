@@ -4,6 +4,36 @@ console.log('todo.js실행')
 
 //1.
 function doPost(){
+    console.log("doPost실행")
+    // 1. 입력받은 값 가져오기
+    let content =  document.querySelector('#content').value;
+    let deadline =  document.querySelector('#deadline').value;
+    console.log(content);
+    console.log(deadline);
+    // 2. 객체화
+    let info = {
+        content : content,
+        deadline : deadline
+    }; console.log(info)
+    // 3. 컨트롤에게 요청/ 응답
+        // HTTP 통신 : 어디에(url) /form에선 action , 어떻게(method) /form 에선 method 응답 데이터(x/success)
+         $.ajax({
+                 url : 'todo/post.do',
+                 method : 'post',
+                 data : info,
+                 success : function ( result ){ // 익명 함수
+                 console.log(result)
+                 if(result==true){
+                 //화면 갱신
+                    doGet();
+                 }
+                 //통신 응답 결과를  HTML 형식으로 출력해주기
+                 }
+})
+}
+    // 4. 출력
+
+
     // - 스프링(자바)와 통신(주고 받고)
     // jquery의 Ajax를 쓸 것.
     // $.ajax(JSON 형식의 통신정보)
@@ -34,7 +64,7 @@ function doPost(){
 */
 
 
-}
+
 //2.
 
 doGet();
