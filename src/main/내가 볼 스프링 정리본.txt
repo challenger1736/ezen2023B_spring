@@ -1,0 +1,6 @@
+스프링 컨테이너의(JVM만들어진 메모리 저장소) 등록 빈(객체) 된 경우
+@Controller @RestController @Service @Repository @Entity @Configuration @ Component
+
+@Autowired
+1. MVC패턴 맞추려고 쓸려고
+2. 등록하면 알아서 스프링 컨테이너에 빈만들어져서 객체 쓰려고

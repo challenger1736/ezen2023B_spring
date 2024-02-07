@@ -1,0 +1,13 @@
+{{>layouts/header}} <!-- 헤더 파일 호출 -->
+<!-- method 형식은 get, post, put, delete 도 있음. -->
+<!-- http 는 action (주소)과 method(방식)이 필요함 -->
+<form action="/articles/create" method="post">
+    제목 : <input name="title"/> <br/>
+    내용 : <textarea name="content" ></textarea> <br/>
+    <button type="submit">Submit</button>
+</form>
+
+{{>layouts/footer}} <!-- 푸터 파일 호출 -->
+
+<!-- 무조건 서버를 통해서 킴, 얘는 html이 아님. -->
+<!-- 얘는 스프링이 켜줘야함. -->

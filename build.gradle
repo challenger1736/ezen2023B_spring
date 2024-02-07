@@ -17,7 +17,8 @@ repositories {
 	mavenCentral()
 }
 
-dependencies { // 여기에 외부라이브러 설치 코드를 입력하는 것.
+dependencies { // 여기에 외부라이브러리 설치 코드를 입력하는 것.
+	// 변경이후 꼭 코끼리 새로고침.
 	// 1. spring web 디펜던시 가져오기
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -27,6 +28,10 @@ dependencies { // 여기에 외부라이브러 설치 코드를 입력하는 것
 
 	// 3. 머스테치 가져오기(View 템플릿:화면 뷰)
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+	// 4. 롬복 (코드 간소화 라이브러리)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
 }
 

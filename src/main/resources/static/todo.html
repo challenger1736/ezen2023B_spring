@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+</head>
+<body>
+
+    <!-- 스프링(자바) 컨트롤에게 요청/응답 받기. -->
+    <!-- 1. resource -> static 폴더내 html 만들기 -->
+    <!-- 2. 스프링 재시작해서 html 확인 http://localhost/todo.html -->
+        <!-- 교재와 다르게 html은 뷰 템플릿(mustache등등) 아니므로 static 바로 실행 가능. -->
+    <!-- 3. resource -> static 폴더내 js 만들기 -->
+    <!-- 4. js에서 자바와 통신하는 함수 필요 JQUERY 라이브러리 -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- JQuery가 해주는 통신 -->
+    <script src="todo.js"></script>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>내용</th>
+                <th>마감일</th>
+                <th>상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- JS가 html 넣어줄 자리 -->
+        </tbody>
+    </table>
+
+</body>
+</html>
