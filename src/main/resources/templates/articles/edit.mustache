@@ -1,0 +1,17 @@
+<!--new 카피 본-->
+{{>layouts/header}} <!-- 헤더 파일 호출 -->
+<!-- method 형식은 get, post, put, delete 도 있음. -->
+<!-- http 는 action (주소 url)과 method(방식)이 필요함 -->
+<form action="/articles/update" method="post">
+    <input name="id" type="hidden" value="{{article.id}}"/>
+<!--    name 이 같아야 자동 매핑이 됨. -->
+<!--    hidden 을 써서 같이 form으로 넘길 값을 id까지 넘겨버리게 -->
+    제목 : <input name="title" value="{{article.title}}"/> <br/>
+    내용 : <textarea name="content" >{{article.content}}</textarea> <br/>
+    <button type="submit" value="">Submit</button>
+</form>
+<a href="/articles/{{article.id}}">뒤로가기(Back)</a>
+{{>layouts/footer}} <!-- 푸터 파일 호출 -->
+
+<!-- 무조건 서버를 통해서 킴, 얘는 html이 아님. -->
+<!-- 얘는 스프링이 켜줘야함. -->

@@ -1,0 +1,21 @@
+640page
+
+인터페이스(다형성)
+                            KumhoTire 구현클래스
+    인터페이스(Tire)
+                            HankookTire 구현클래스
+
+
+                            Tv 구현클래스
+    인터페이스(remoteControl)
+                            audio 구현클래스
+
+                            ArrayList 구현클래스
+    List인터페이스            Vector 구현클래스
+                            LinkedList 구현클래스
+
+    List<> list = new ArrayList<>();
+        List<> list = new Vector<>(); 가능
+
+    ArrayList<> list = new ArrayList<>();
+            List<> list = new Vector<>(); 불가능 (형제)

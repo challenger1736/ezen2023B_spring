@@ -1,0 +1,23 @@
+1. 개발환경 : JDK17, 인텔리제이 무료버전
+2. 프로젝트 생성
+        1. Project : Gradle - Groovy : (각종 외부) 라이브러리 들을 자동으로 설치/관리 시스템
+        2. Language : Java
+        3. Spring Boot : 3.~ 이상
+        4. Metadata
+            Group : com
+            Artifact : ~~
+            Description : 설명
+
+            Packaging : Jar
+            Java : 17
+
+        5. Dependencies
+            1. Spring Web
+            2. MySQL Driver
+            3. Lombok
+            4. Mustache
+
+3. 인텔리제이에서 프로젝트 열기
+        1. 파일 -> 열기 -> 파일이름 열기
+        2. SpringMvcTest1Application 클래스 내 main함수 실행
+        3. 브라우저에서 http://localhost:8080 접속

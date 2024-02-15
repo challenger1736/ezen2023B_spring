@@ -5,10 +5,9 @@ import book.dto.ArticleForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -40,16 +39,28 @@ public class ArticleDao {
     }
     //SQL 이벤트 //
 
-    public boolean createArticle(ArticleForm form){
+    public ArticleForm createArticle(ArticleForm form){
         System.out.println("ArticleDao.createArticle");
         System.out.println("form = " + form);
         try{
             String sql = "insert into article(title, content) values(?, ?)";
-            ps = conn.prepareStatement(sql);
+            // pk 값 뺴오는 방법 ,
+            // 1. 기재 할 때 자동으로 생성된 키 호출 선언
+            // 2. ps.getGet
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,form.getTitle());
             ps.setString(2,form.getContent());
-            int count = ps.executeUpdate();
-            if(count==1){return true;}
+
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                System.out.println("방금 자동으로 생성된 pk(id):" + rs.getLong(1));
+                ArticleForm articleForm = new ArticleForm();
+                articleForm.setId(rs.getLong(1));
+                articleForm.setTitle(form.getTitle());
+                articleForm.setContent(form.getContent());
+                return articleForm;
+            }
         }catch (Exception e){
             System.out.println(e);
             log.debug(form.toString()); // 개발용(디버그) 로그
@@ -57,7 +68,119 @@ public class ArticleDao {
             log.warn(form.toString()); // (경고)로그
             log.error(form.toString()); // (에러)로그
         }
+        return new ArticleForm();
+    }
+
+    // --------------------------------------------------------//
+    // 2. 개별 글 조회 : 매개변수, 조회할게시물번호(id) 반환: 조회한게시물정보 1개(DTO)
+    public ArticleForm show(Long id){
+        try{
+            String sql = "select * from article where id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1,id);
+            rs = ps.executeQuery();
+            if(rs.next()){ // 1개니까 next()는 한번 처리.
+                // Dto를 만들자
+                ArticleForm form = new ArticleForm(rs.getLong(1), rs.getString(2), rs.getString(3));
+                return form;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return new ArticleForm(); // null보다 빈거 보내는게 안전함.
+    }
+
+    // ----------------------------------------------------------//
+    // 3. 전체 글 조회 : 매개변수 X, 리턴타입 : ArrayList
+    public List<ArticleForm> index(){
+        List<ArticleForm> list = new ArrayList<>();
+        try{
+            String sql = "select*from article order by id desc";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                // 1. 객체 만들기
+                ArticleForm form = new ArticleForm(
+                        rs.getLong(1), rs.getString(2), rs.getString(3)
+                );
+
+                // 2. 객체를 리스트에 넣기
+                list.add(form);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    // ------------------------------------------------------- //
+    // 4. id를 해당하는 게시물 정보 호출 : 매개변수 = id , 리턴 = dto(form)
+    public ArticleForm findById(long id){
+        try{
+            String sql = "select*from article where id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1,id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+
+                return new ArticleForm(
+                        rs.getLong(1),
+                        rs.getString(2),
+                        rs.getString(3)
+                );
+            }
+                // 2. 객체를 리스트에 넣기
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return null; // 없거나 오류면 null로 하겠다.
+    }
+
+    public ArticleForm update(ArticleForm form){
+        System.out.println("ArticleDao.update");
+        System.out.println("form = " + form);
+        try{
+            String sql = "update article set title = ?, content = ? where id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,form.getTitle());
+            ps.setString(2,form.getContent());
+            ps.setLong(3,form.getId());
+            int count = ps.executeUpdate();
+            if(count==1){
+//                ArticleForm articleForm = new ArticleForm();
+//                articleForm.setId(form.getId());
+//                articleForm.setTitle(form.getTitle());
+//                articleForm.setContent(form.getContent());
+//                return articleForm;
+                return form; // 이거만 해도되는데 뭐했지 ㅋㅋ
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            log.debug(form.toString()); // 개발용(디버그) 로그
+            log.info(form.toString()); // 운영용(정보,배포) 로그
+            log.warn(form.toString()); // (경고)로그
+            log.error(form.toString()); // (에러)로그
+        }
+        return new ArticleForm();
+
+    }
+
+    // 6. 삭제 처리 , 매개변수 : 삭제할id , 리턴 : T/F
+    public boolean delete(long id){
+        try{
+            String sql = "delete from article where id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setLong(1,id);
+            int count = ps.executeUpdate();
+            if(count==1){
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
         return false;
     }
+
 
 }

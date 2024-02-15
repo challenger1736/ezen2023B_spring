@@ -15,9 +15,11 @@ import lombok.*;
 @Setter // (lombok)
 //@Builder // 쓰면 편하다 하셨는데 뭔지는 아직 안알려줌. (lombok)
 public class ArticleForm {
+    private Long id;
     // 1. 필드 // 우린 필드만 잘 하면됨.
     private String title; // 입력받은 제목 필드
     private String content; // 입력받은 내용 필드
+
 
 }
 

@@ -1,0 +1,24 @@
+컬렉션(수집) 프레임워크(미리만들어진 클래스/인터페이스)
+1. List 컬렉션
+        - List 인터페이스
+                - 저장순서 보장/인덱스, 중복 허용 O
+                - 구현클래스 : ArrayList, Vector, LinkedList
+                - 사용방법 : add(), get(), contains(), set(), isEmpty(), size(), remove(), clear()
+                - 순회방법
+                    1. for(int i =0 ; i < 리스트명.size() ; i++){실행문;}
+                    2. for (타입 반복변수명 : 리스트명){실행문;}
+                    3. 리스트명.forEach(반복변수명 -> 실행문);
+2. Set 컬렉션
+        - Set 인터페이스
+                - 저장순서 보장하지 않는다/인덱스 X, 중복 허용 X
+                - 구현클래스 : HashSet
+                - 사용방법 :  add(), contains(), isEmpty(), size(), remove(), clear()
+                iterator() : 반복자 객체 반환 함수, .next(), hasNext()[T/F]
+                  - 순회방법
+                               인덱스가 없어서 일반 포문은 사용할 수 없다.
+                                    1. Iterator<타입> 반복자객체명 = SET컬렉션명.iterator();
+                                    while(반복자객체명.hasNext()){
+                                            반복자객체명.next();
+                                    }
+                                    2. for (타입 반복변수명 : SET컬렉션명){실행문;}
+                                    3. SET컬렉션명.forEach(반복변수명 -> 실행문);

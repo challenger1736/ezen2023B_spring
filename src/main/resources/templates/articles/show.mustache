@@ -1,0 +1,32 @@
+{{>layouts/header}} <!-- 헤더 파일 호출 -->
+<a href="/articles/{{article.id}}/edit">수정(Edit)</a>
+<a href="/articles/{{article.id}}/delete">삭제(Delete)</a>
+<a href="/articles">목록보기(Go to Article List)</a>
+<table border="1">
+    <thead>
+        <tr>
+           <th> ID </th>
+           <th> Title </th>
+           <th> Content </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#article}}
+<!--            모델의 키 값               -->
+<!--        <tr>-->
+<!--            <td> (샘플)1 </td>-->
+<!--            <td> (샘플)안녕하세요 </td>-->
+<!--            <td> (샘플)하하하하하 </td>-->
+<!--        </tr>-->
+    <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{content}}</td>
+    </tr>
+<!--   #,/article말고  또는 article.id , article.title 정도  -->
+
+        {{/article}}
+
+    </tbody>
+</table>
+{{>layouts/footer}} <!-- 푸터 파일 호출 -->
