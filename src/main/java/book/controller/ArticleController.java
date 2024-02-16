@@ -93,7 +93,7 @@ public class ArticleController {
 
     // p 202 수정 1단계 : 기존 데이터 불러오기
     @GetMapping("articles/{id}/edit")
-    public String edit(@PathVariable("id") long id, Model model){ // ("id") 는 URL 변수명 을 넣어서 여러군데 PathVariable을 쓸 수 있다.
+    public String edit(@PathVariable("id") long id, Model model){ // ("id") 는 URL 변수명 을 넣어서 여러군데 PathVariable을 쓸 수 있다. (예> @PathVariable ~~~, @PathVariable ~~
         // JAVA 함수( @PathVariable 타입 매개변수명): 요청한 URL 주소 경로상의 매개변수 대입용 , 타입 자동변환도 해줌.
         // URL : /articles/{매개변수명}/edit , 예시 : /articles/1/edit, /articles/2/edit
         System.out.println("id = " + id);
@@ -117,7 +117,7 @@ public class ArticleController {
         return "redirect:/articles/"+updated.getId();
     }
 
-    @GetMapping("/articles/{id}/delete") // a 태그이므로 Get임, DeletMapping 아님
+    @GetMapping("/articles/{id}/delete") // a 태그이므로 GetMapping임, DeleteMapping 아님
     public String delete(@PathVariable long id){
         System.out.println("id = " + id);
         log.info("삭제 요청이 들어왔습니다!");
