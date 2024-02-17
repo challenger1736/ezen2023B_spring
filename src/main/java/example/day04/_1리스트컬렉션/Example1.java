@@ -22,7 +22,7 @@ public class Example1 {
 
         // List 선언하는 방법
         // E : 리스트 저장하고 싶은 객체 타입
-        // 1. List<E> list = new ArrayList<>();
+        // 1. List<E> list = new ArrayList<>(); // 나중에 다른 구현체로 변경할 때 유연하게 대처할 수 있음. 일반적으로는 인터페이스를 사용하여 프로그래밍하는 것이 더 좋은 설계 방식으로 여겨집니다.
         // 2. List<E> list = new ArrayList<E>();
         // 3. List list = new ArrayList<>();
         // 4. ArrayList<E> list = new ArrayList<>();

@@ -46,8 +46,6 @@ public class TodoDao { // java 그대로
 
             int count = ps.executeUpdate();
             if(count == 1){return true;}
-
-
         }
         catch (Exception e){
             log.error(e.toString());
@@ -78,7 +76,6 @@ public class TodoDao { // java 그대로
                 list.add(todoDto);
             }
             return list;
-
         }
         catch (Exception e){
             log.error(e.toString());

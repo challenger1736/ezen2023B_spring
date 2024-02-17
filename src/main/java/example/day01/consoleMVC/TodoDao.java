@@ -12,7 +12,8 @@ public class TodoDao { // java 그대로
     private Connection conn; // DB 연동 인터페이스
     private PreparedStatement ps; // SQL 실행, 매개변수 인터페이스
     private ResultSet rs;   // SQL 실행 결과를 연동, 호출해주는 인터페이스친구
-    public TodoDao(){
+    public TodoDao(){ // 컨트롤에서 만든 다오 컨트롤이 켜지면 다오를 만들어서 DB에서 연동을 시킴 private 이라 하나만 생성됨.
+        // 그래서 DB연동을 계속 안해도 되는 것임 . 거기에 스택변수에 저장된 TodoDao todoDao 가 있음.
         try {
             // 1. jdbc 라이브러리 호출
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -63,7 +64,7 @@ public class TodoDao { // java 그대로
             // 5. SQL 실행 결과
             ArrayList<TodoDto> list = new ArrayList<>();
             while (rs.next()){
-                //next() 레코드 이동
+                //next() 레코드 이동 boolean
                 //레코드 1개당 dto  1개
                 TodoDto todoDto = new TodoDto();
                 todoDto.setId(rs.getInt("id"));

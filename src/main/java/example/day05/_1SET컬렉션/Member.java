@@ -1,5 +1,8 @@
 package example.day05._1SET컬렉션;
 
+import lombok.ToString;
+
+@ToString
 public class Member {
     public String name;
     public int age;

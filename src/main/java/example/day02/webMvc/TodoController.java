@@ -13,7 +13,7 @@ public class TodoController { // java 거의 그대론데 컨트롤러 선언과
     private TodoDao todoDao = new TodoDao(); //스프링에선 이렇게 안쓴다.
 
     // 자원의 경로를 만들때 Mapping을 쓴다.
-    @PostMapping("todo/post.do") // HTTP 랑 통신하기 위한 Mapping
+    @PostMapping("todo/post.do") // HTTP 랑 통신하기 위한 Mapping(URL주소)
     // 할 일 등록 함수
     public boolean doPost(TodoDto todoDto){
         return todoDao.doPost(todoDto);

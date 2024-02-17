@@ -19,6 +19,7 @@ public class TodoController { // java 그대로
         return todoDao.doPost(todoDto);
     }
 
+    // 넣는 함수
     // http://localhost:8080/todo/post.do // 얜 에러뜸.
     // GetMapping으로 바꾸고
     // http://localhost:8080/todo/post.do?content=안녕하세요&deadline=2024-02-05

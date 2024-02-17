@@ -9,7 +9,7 @@ public class Example1 {
 
         /*
         set 컬렉션
-             - 저장 순서/ 인덱스 유지되지 않는다. (꺼내는 순서가 바뀔 수도 있다.)
+             - 저장 순서/ 인덱스 유지되지 않는다. (꺼내는 순서가 바뀔 수도 있다.) // HashSet , TreeSet는 순서 있음
              - 중복 저장할 수 없다. null 하나만 가능하다.
              *
              기본 중복검사 방식 : hashCode() --t--> equals() --t--> 중복
@@ -29,13 +29,14 @@ public class Example1 {
                         객체명.hasNext(); : 다음에 가져올 객체 boolean / 존재하면 true 아니면 false
                         객체명.next();    : 다음에 가져올 객체 불러오기
                         객체명.remove()    : 가져온 객체를 삭제한다
+                        // 하나 부르려고 해도 이렇게 for문 돌려야하는 거 같음.
                 .isEmpty()      : set 컬렉션이 비어 있는지 확인[T/F]
                 .clear()        : set 컬렉션내 저장된 모든 객체를 삭제
                 .remove(객체)    : 주어진 객체를 set 컬렉션내 삭제
                 .contains(객체)  : 주어진 객체가 set 컬렉션내 있나 없나 확인[T/F]
 
         선언
-            Set<E> 컬렉션명 = new 구현클래스<>();
+            Set<E> 컬렉션명 = new 구현클래스<>(); (구현 클래스 : HashSet, TreeSet(순서)- Set에서도 순서를 구현해놓은 TreeSet가 있다는 것만 알면됨)
             E : 컬렉션에 저장할 객체의 타입
 
         순회
@@ -48,7 +49,8 @@ public class Example1 {
             2. 향상된 for문
                 (for String s : set ) {실행문;}
             3. forEach() 함수
-                set.forEach(s -> 실행문);
+                set.forEach(s(객체하나) -> 실행문);
+                set.forEach(s -> sout(s)); // 위와 같다.
         */
         Set<String> set = new HashSet<String>();
 
@@ -72,6 +74,11 @@ public class Example1 {
         }
             // 2.
         Iterator<String> rs = set.iterator(); // Iterator뜻은 반복자, 반복요소 쓰려고 부르는 인터페이스
+        System.out.println("rs : "+rs); // 불러보면 hashMap 이다. 즉 순서가 없는 배열을 만들어서 불러 내오는 느낌이네.
+//        while(!rs.next().isEmpty()){ //이거 안되네 신기하네, !=null도 마찬가지로 안됨. Gradle 9.0과 호환되지 않는다고 하는데, 이유를 모르겠음.
+//            System.out.println("rs.next()로 와일문 : " + rs.next());
+//
+//        }
         while(rs.hasNext()){
             System.out.println("rs.next() : " + rs.next());
 
@@ -83,7 +90,7 @@ public class Example1 {
         // ----------------------------------------------- //
         Set<Member> set2 = new HashSet<>();
         set2.add(new Member("홍길동",30));
-        set2.add(new Member("홍길동",30));
+        set2.add(new Member("홍길동",30)); // ToString 쓰고 보면 하나만 들어가있음. 아무리 new라도 해쉬 코드가 같기 때문에, 같은 객체로 침.(키가 같다, set 에서는 키가 같으면 안됨.)
         System.out.println("set2 = " + set2);
         System.out.println("set2.hashCode() = " + set2.hashCode());
         System.out.println("총 객체 수 : " +set2.size());
