@@ -12,6 +12,7 @@ public class Example1 {
                 - 구현클래스 :
                         HashMap   : 동기화X    ,
                         Hashtable : 동기화O    , 멀티스레드 쓸 때 동기화하는 놈들 권장(List 인터페이스 의 VECTOR같은)
+                        TreeMap
                 - 선언방법
                     Map<K,V> map = new HashMap<>();
                 - 사용방법/메소드
@@ -53,8 +54,8 @@ public class Example1 {
                 while(entryIterator.hasNext()){
                     Map.Entry<String,Integer> entry = entryIterator.next();
                     System.out.println(entry);
-                    System.out.println(entry.getKey());
-                    System.out.println(entry.getValue());
+                    System.out.println(entry.getKey()); //엔트리명.getKey or 맵.key(키명)
+                    System.out.println(entry.getValue()); // 엔트리명.getValue
                 }
                 //3.
                 for(Map.Entry<String,Integer> entry : map.entrySet()){
