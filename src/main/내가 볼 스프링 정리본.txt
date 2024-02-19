@@ -60,7 +60,7 @@ SpringApplication.run(AppStart.class);
           >>정보(데이터)만 주고 받기가 불가능.
                      행위때 마다 화면 요청
                      - 최초 실행은 빠름 but 화면전환 계속 됨 ( 부분요청 새로고침O)
-          - 리턴 : 머스테치
+          - 리턴 : 머스테치(거기에 Model model(addAttribute된.)을 포함함)
 
 AJAX(JQUERY) 데이터 주고받기           [클라이언트 사이드 랜더링]REACT
             - 데이터만 주고 받기 O      행위할 때마다 부분적 요청.
@@ -77,18 +77,6 @@ AJAX(JQUERY) 데이터 주고받기           [클라이언트 사이드 랜더�
 ====================================================================================
 
         @Component 빈(객체)만들고 @AutoWired TodoDao todoDao; 연결하기
-
-====================================================================================
-        List<E> list = new ArrayList<>(); 과 ArrayList<E> list = new ArrayList<>();의 차이.
-
-List는 외부에서 부를 때 List로 불러야하므로 다른 구현체로의 전환이 쉽다.
-일반적으로 인터페이스로 구현체를 만드는 것이 더 좋다고 여겨진다.
-
-            List<> list = new ArrayList<>();
-                List<> list = new Vector<>(); 가능
-
-            ArrayList<> list = new ArrayList<>();
-                    List<> list = new Vector<>(); 불가능 (형제)
 
 ====================================================================================
 
