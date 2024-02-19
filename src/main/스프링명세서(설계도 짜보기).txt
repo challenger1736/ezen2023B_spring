@@ -1,0 +1,24 @@
+기능		URL			params 설명									method		contentType			서버 HTTP Request		params			서버HTTP Response			 contentType
+회원 가입		/main/signup		input name = "mid", name = "mpw" name="mname"					POST		application/x-www.form-urlencode	@PostMapping		MemberDto		머스테치 파일		 	"main/login";		
+회원 탙퇴		/main/{mid}/delete		mid : 식별키									GET		text/html				@GetMapping		@PathVariable String mid	머스테치 파일		 	"main"
+회원 정보 수정	/main/{mid}/update		mid : 식별키 , mname = '수정 할 닉네임'						POST		application/x-www.form-urlencode	@PostMapping		MemberDto		"redirect:/main"+result.getMiD();
+회원 비밀번호  찾기	/main/mSearch		mid : 식별키									GET		text/html				@GetMapping		String mid		머스테치 파일			"main/mSearch/{mid}"
+로그인		/main/login		input name = "mid", name = "mpw"							GET		text/html				@GetMapping		MemberDto		"redirect:/main"+result.getMiD();		
+
+
+
+
+강사님
+
+회원가임 처리 요청  /member/signup		{id="아이디", pw="비밀번호",name="이름",email="이메일",phone="전화번호",img="프로필사진"}	POST		application/x-www.form-urlencode	@PostMapping		MemberDto dto		boolean : true/false			@ResponseBody : application/json
+로그인 처리 요청	/member/login		{id="아이디", pw="비밀번호"}								POST?		application/x-www.form-urlencode	@PostMapping		LoginDto dto		boolean : true/false			@ResponseBody : application/json
+
+회원가입 페이지 요청/member/signup												GET		text/html				@GetMapping					
+로그인 페이지 요청   /member/login												GET		text/html				@GetMapping					
+	* URL 주소는 애플리케이션 중복안됨, URL 주소와 method가 동일한 경우는 불가능, method 다르면 가능 *
+
+다시 생각해보기 (나)
+
+회원 정보 수정	/member/{id}/update	{ 비밀번호, 이름 전화번호 이메일 프로필}							POST		application/x-www.form-urlencode	@PostMapping		MemberDto dto		boolean : true/false			@ResponseBody : appication/json
+	- 비밀번호, 이름 전화번호 이메일 프로필
+회원 탈퇴		/member/delete												POST		application/x-www.form-urlencode	@PostMapping		
