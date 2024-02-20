@@ -23,12 +23,12 @@ function signup(){
 //            data : : '보낼 데이터'
 //            success : function result( '받을 데이터' ){}
 //        })
-    $.ajax({
+    $.ajax({ // ajax 쓸려면 html에 jQuery 포함 되어야함.
             url : '/member/signup',
             method : 'POST',
             data : info,
             // contentType : application/json 이런식으로 변환도 가능함. 지금은 폼과 동일하게 전송되는 일.(기본값이 form)
-            success : function ( result ){ //함수명은 생략가능.
+            success : function ( result ){ //함수명은 생략가능. Responsebody의 return값이 success의 result 로 들어온다.
                 console.log(result);
                 // 4. 결과
                 if(result){
