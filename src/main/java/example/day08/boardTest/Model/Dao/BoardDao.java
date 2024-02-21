@@ -97,5 +97,22 @@ public class BoardDao {
         return false;
     }
 
+    // 5. 게시물 번호에 따른 입력받은 패스워드 검증 // Dao가 Dao에게 하지말기. // Controller 왔다갔다 패스워드 검증 + 삭제 수정
+    public boolean confirmPassword(int bno, String bpw){
+        try{
+            String sql = "select*from board where bno = ? and bpw = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bno);
+            ps.setString(2, bpw);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
 
 }

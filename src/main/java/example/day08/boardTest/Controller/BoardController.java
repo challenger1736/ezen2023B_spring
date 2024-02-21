@@ -40,19 +40,31 @@ public class BoardController {
     public boolean update(BoardDto boardDto){
         System.out.println("BoardController.update");
         System.out.println("boardDto = " + boardDto);
-        boolean result = boardDao.update(boardDto);
-        System.out.println(boardDto);
-        return result;
+        // 1. 패스워드 검증 요청
+        if(boardDao.confirmPassword(boardDto.getBno(),boardDto.getBpw())){
+            // 2. 수정 요청
+            boolean result = boardDao.update(boardDto);
+            System.out.println(boardDto);
+            return result;
+        }
+        return false;
     }
 
-    @GetMapping("/board/delete/{bno}")
+    @GetMapping("/board/delete/{bno}/{bpw}")
     @ResponseBody
     // 4. 삭제
-    public boolean delete(@PathVariable int bno){
+    public boolean delete(@PathVariable int bno, @PathVariable String bpw){
         System.out.println("BoardController.delete");
         System.out.println("bno = " + bno);
-        boolean result = boardDao.delete(bno);
+        // 1. 패스워드 검증 요청
+        boolean result = boardDao.confirmPassword(bno,bpw);
+        if(result){
+            // 2. 삭제 요청
+            result = boardDao.delete(bno);
+        }
         return result;
+
+
     }
     // ======================== view Rest =========================== //
     // 1. HTML (STATIC) : http ://localhost/day08Board.html
@@ -61,4 +73,6 @@ public class BoardController {
     public String boardIndex(){
         return "day08Board.html";
     }
+
+
 }

@@ -8,10 +8,10 @@
 </head>
 <body>
     <h1> 비회원 방문록 </h1>
-    내용: <input /> <br/>
-    작성자: <input /> <br/>
-    비밀번호: <input /> <br/>
-    <button> 등록 </button>
+    내용: <input id="bcontent"/> <br/>
+    작성자: <input id="bwriter"/> <br/>
+    비밀번호: <input id="bpw"/> <br/>
+    <button onclick="doCreate()"> 등록 </button>
 
     <table>
         <thead>
@@ -19,16 +19,23 @@
             <th>내용</th>
             <th>작성자</th>
             <th>비고</th>
+
         </thead>
         <tbody>
-            <th>1</th>
-            <th>23</th>
-            <th>3444</th>
-            <th>512352</th>
-        <button onclick="doDelete(2)">삭제</button>
-        <button onclick="doDelete(2)">수정</button>
+        <!-- js 데이터 들어오는 곳 -->
+<!--            <tr>-->
+<!--                <th>1</th>-->
+<!--                <th>23</th>-->
+<!--                <th>3444</th>-->
+<!--                <th><button onclick="doDelete(3)">삭제</button>-->
+<!--                    <button onclick="doUpdate(3)">수정</button></th>-->
+<!--            </tr>-->
+
         </tbody>
     </table>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/day08Script.js"></script>
+
 
 
 </body>
