@@ -1,8 +1,8 @@
 package example.day01.webMVC;
 // 데이터 이동 객체 :
-// TodoDto 타입 vs Map<String,String>
-// List<TodoDto> vs List<Map<String,String>>
-// member+todo : todoMemberDto  vs Map<String,String>
+// TodoDto 타입 vs Map.txt<String,String>
+// List<TodoDto> vs List<Map.txt<String,String>>
+// member+todo : todoMemberDto  vs Map.txt<String,String>
 public class TodoDto { // java 그대로
     // 1. ㅍㄷ(Dto일 사용할 경우 db필드와 일치하고 추가적으로 추가가능)
     private int id;

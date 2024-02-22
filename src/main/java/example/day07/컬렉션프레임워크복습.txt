@@ -2,9 +2,9 @@
     1. List : 저장순서/인덱스 o , 중복 허용
         ArrayList, Vector, LinkedList
     2. Set : 저장순서/인덱스 x, 중복 허용 x
-        HashSet, TreeSet
+        HashSet, TreeSet(얘는 순서 있음)
     3. Map : entry(key,value)저장, key 중복 불가능
-        HashMap, Hashtable, TreeMap
+        HashMap, Hashtable, TreeMap(얘는 순서 있음)
 
     검색을 강화시킨 컬렉션
         - TreeSet, TreeMap
@@ -20,6 +20,13 @@
 
         - 큐 : 선입 선출
             사용되는 용도 : 프린트기(먼저 인쇄요청한 순서대로) , 스레드 풀(동기화=요청순서), 1인 식당 웨이팅을 걸어주는 일
+
+                    System.out.println("가장 낮은 점수 : " + scores.first());
+                    System.out.println("가장 높은 점수 : " + scores.last());
+                    System.out.println("95점 아래 점수 : " + scores.lower(95));
+                    System.out.println("95점 위의 점수 : " + scores.higher(95));
+                    System.out.println("95점이거나 바로 아래 점수 : " + scores.floor(95));
+                    System.out.println("85점이거나 바로 위의 점수 : " + scores.ceiling(85));
 
 
 

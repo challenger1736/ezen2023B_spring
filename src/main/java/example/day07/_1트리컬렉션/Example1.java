@@ -44,7 +44,7 @@ public class Example1 {
         System.out.println();
 
 
-        scores.forEach(i -> System.out.println("i : "+i));
+        scores.forEach(i -> System.out.println("i : "+i)); // 위의 것과 같다.
         System.out.println();
 
         // 4. HashSet 보다 추가적인 메소드 제공
@@ -61,6 +61,7 @@ public class Example1 {
         System.out.println("descending = " + descending);
         System.out.println("scores 내림차순 = " + scores.descendingSet());
         // 6. 범위 검색 (80 <= ) 80 이상 true는 포함하겠다는 뜻, false면 초과
+        System.out.println("scores.headSet(80,true)"+scores.headSet(80,true));; // 80까지
         System.out.println("scores.tailSet(80,true) = "+ scores.tailSet(80,true));
         // 범위 검색 (80 <= 90 ) 80~89 사이
         System.out.println("scores.subSet(80,true,90,false) = "+ scores.subSet(80,true,90,false));

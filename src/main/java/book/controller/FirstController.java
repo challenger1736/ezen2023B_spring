@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FirstController {
 
     @GetMapping("/hi") // 컨트롤러임을 선언해야만 GetMapping, // 통신방법 http 이므로  http://localhost:8080/hi
-    public String niceToMeetYou(Model model){//ui Model 인터페이스(맵 같은거지만 그냥 스프링에서는 이런 느낌으로 쓴다.)
+    public String niceToMeetYou(Model model){//ui Model 인터페이스(맵 같은거지만 그냥 스프링에서는 이런 느낌으로 쓴다.) Model에서 {{}}값들을 들고와서 addAttribute로  greetings 머스테치에 넣어주는 방식인가봄.
         // return "머스테치파일명"을 넣어주기
         model.addAttribute("유저name","홍팍");
         return "greetings"; // greetings.mustache 파일 반환 but 스프링에서 html으로 변환후 넘어감.

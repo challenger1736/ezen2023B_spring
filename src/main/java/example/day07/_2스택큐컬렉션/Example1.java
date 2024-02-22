@@ -35,7 +35,7 @@ public class Example1 {
 
         while (!messageQueue.isEmpty()){
             System.out.println(messageQueue);
-            System.out.println(messageQueue.poll());
+            System.out.println(messageQueue.poll()); // 꺼내기
             System.out.println(messageQueue);
             System.out.println();
         }

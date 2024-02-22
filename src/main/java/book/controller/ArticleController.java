@@ -19,7 +19,7 @@ import java.util.List;
 // 3. 모든 클라이언트 요청은 컨트롤러로 들어온다.(MVC 패턴맞춰서)
 public class ArticleController {
 
-    @Autowired // 스프링 컨테이너에 등록된 빈 주입한다.(DI, 의존성 주입) IOC
+    @Autowired // 스프링 컨테이너에 등록된 빈 주입한다.(DI, 의존성 주입) IOC // @Component 한 빈들.
     ArticleDao articleDao;
 
     @GetMapping("/articles/new") // HTTP 요청 경로 : GET 방식 : localhost:port번호/article/new
@@ -32,7 +32,7 @@ public class ArticleController {
     // 2. 입력 태그 속성의 name과 DTO 필드와 필드명 일치하면 자동 연결된다.
     // 3. public 생성자 필요.
     @PostMapping("/articles/create") // HTTP 요청 경로 : Post 방식 : localhost:port번호/ariticle/create
-    public String createArticle(ArticleForm form){
+    public String createArticle(ArticleForm form){ // http 방식을 주소로 켜면 이 함수가 실행되는데 이 함수에 들어갈 놈은 뷰 템플릿이나 html에서 만든다.
         System.out.println(new Date());
         System.out.println("ArticleController.createArticle");// soutm 중요!
         System.out.println("form = " + form); // 매개변수 출력.
@@ -61,7 +61,7 @@ public class ArticleController {
             // @PathVariable : URL 요청으로 들어온 전달값을 컨트롤러함수의 매개변수로 가져오는 어노테이션
     @GetMapping("/articles/{id}") //클라이언트 요청 예시 :  /articles/1 , /articles/2, /articles/3 ...
 //    @ResponseBody // 객체를 반환, 화면을 반환할래 객체(값)를 반환할래 선택 2가지 밖에 없다.
-    public String show(@PathVariable Long id, Model model){              //id:1        id:2          id:3
+    public String show(@PathVariable Long id, Model model){ //id:1        id:2          id:3
         System.out.println("id = " + id);
         // JPA 대신에 DAO p.159
         // 요청된 ID를 가지고 DAO에게 데이터 요청

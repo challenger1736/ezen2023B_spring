@@ -17,7 +17,7 @@ function doPost(){
     }; console.log(info)
     // 3. 컨트롤에게 요청/ 응답
         // HTTP 통신 : 어디에(url) /form에선 action , 어떻게(method) /form 에선 method 응답 데이터(x/success)
-         $.ajax({
+         $.ajax({ // 아작스가 어떤 url을 어떤 메소드로 실행할지 하게 해줌. / 들어오면 success로 자바에서 받은 리턴값을 매개변수에 자동으로 넣음.
                  url : 'todo/post.do',
                  method : 'post',
                  data : info,

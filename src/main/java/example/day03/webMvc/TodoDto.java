@@ -3,9 +3,9 @@ package example.day03.webMvc;
 import lombok.*;
 
 // 데이터 이동 객체 :
-// TodoDto 타입 vs Map<String,String>
-// List<TodoDto> vs List<Map<String,String>>
-// member+todo : todoMemberDto  vs Map<String,String>
+// TodoDto 타입 vs Map.txt<String,String>
+// List<TodoDto> vs List<Map.txt<String,String>>
+// member+todo : todoMemberDto  vs Map.txt<String,String>
 @ToString
 @Setter
 @Getter

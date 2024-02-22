@@ -14,7 +14,7 @@ public class Example1 {
                         Hashtable : 동기화O    , 멀티스레드 쓸 때 동기화하는 놈들 권장(List 인터페이스 의 VECTOR같은)
                         TreeMap
                 - 선언방법
-                    Map<K,V> map = new HashMap<>();
+                    Map.txt<K,V> map = new HashMap<>();
                 - 사용방법/메소드
                     .put(key, value)        : 엔트리 추가
                     .get(key)               : 주어진 key 이용한 value 호출
