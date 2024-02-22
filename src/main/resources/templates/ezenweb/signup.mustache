@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>회원가입 페이지</h1>
+
+
+
+    <!-- {resources/static} / js/member.js -->
+
+    <div action="signup" method="post">
+        <span>아이디 : </span><input id="id"/><br/>
+        <span>비밀번호 : </span><input type="password" id="pw"/><br/>
+        <span>비밀번호 : </span><input type="password" id="pwconfirm"/><br/>
+        <span>이름 : </span><input id="name"/><br/>
+        <span>전화번호 : </span><input id="phone"/><br/>
+        <span>이메일 : </span><input id="email"/><br/>
+        <span>프로필 사진 : </span><input id="img"/><br/>
+        <button type="button" onclick="signup()">회원가입</button>
+    </div>
+
+
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/member.js"></script>
+
+
+</body>
+</html>

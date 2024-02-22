@@ -1,0 +1,29 @@
+HTTP
+        URL : HTTP 규약의 통신 식별 경로
+        method : HTTP 규약의 통신 방법
+            1. GET
+            2. POST
+            3. PUT // 아직 사용 안함
+            4. DELETE // 아직 사용 안함
+
+        HTTP 이용한 자원 제공 방법
+            1. PATH : URL 사이의 문자 형식 넣어서 보내는 방법
+                1. 요청
+                    localhost/articles/{매개변수1}(/{매개변수2})/edit 등등,,
+                2. 스프링 받을 때
+                    매핑함수(@PathVariable 타입 매개변수명){}
+
+            2. contentType : HTTP 제공하는 내용물(payload)을 body 포함해서 보내는 방법 // 아직 안배움
+                1. application/x-www.form-urlencode <HTML form 기본형태>
+                    주로 폼 전송시 사용
+                    1. 요청
+                        <form action = "/articles/create" method="post">
+                                내용들 ~
+                        </form >
+
+                    2. 스프링 받을때
+                        매핑 함수(객체타입 매개변수명){}
+
+
+                2. application/json ** 우린 이거 많이 쓸 예정
+
