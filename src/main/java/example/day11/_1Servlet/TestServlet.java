@@ -48,6 +48,8 @@ public class TestServlet extends HttpServlet {
         resp.setContentType("application/json"); // 데이터의 타입 ( 받는 입장에서의 데이터의 처리방법 )
 //        resp.getWriter().println("안녕하세요.");
         resp.getWriter().println("{\"msg\" : \"안녕하세요.\"}");
+        resp.getWriter().println("{msg : 안녕하세요.}");
+
          // 자바 데이터를 JSON 데이터로 변환하는 작업이 필요함.
             // 1. 직접한다.
             // 2. 라이브러리를 사용한다.

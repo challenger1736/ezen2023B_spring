@@ -1673,3 +1673,90 @@ java.lang.IllegalStateException: Optional int parameter 'id' is present but cann
 2024-02-23T15:41:26.089+09:00  INFO 15180 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-02-23T15:41:26.090+09:00  INFO 15180 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2024-02-23T15:41:27.308+09:00  WARN 15180 --- [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `int` from Object value (token `JsonToken.START_OBJECT`)]
+2024-02-23T16:13:55.172+09:00  WARN 15180 --- [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `int` from Object value (token `JsonToken.START_OBJECT`)]
+2024-02-23T16:13:58.297+09:00  WARN 15180 --- [http-nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `int` from Object value (token `JsonToken.START_OBJECT`)]
+2024-02-23T16:14:21.610+09:00  WARN 15180 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `int` from Object value (token `JsonToken.START_OBJECT`)]
+2024-02-23T16:14:42.319+09:00  INFO 12640 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 12640 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T16:14:42.321+09:00  INFO 12640 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T16:14:43.027+09:00  INFO 12640 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T16:14:43.037+09:00  INFO 12640 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T16:14:43.037+09:00  INFO 12640 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T16:14:43.091+09:00  INFO 12640 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T16:14:43.091+09:00  INFO 12640 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 728 ms
+2024-02-23T16:14:43.411+09:00  INFO 12640 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T16:14:43.418+09:00  INFO 12640 --- [main] example.day11.AppStart                   : Started AppStart in 1.432 seconds (process running for 1.665)
+2024-02-23T16:14:45.591+09:00  INFO 12640 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T16:14:45.591+09:00  INFO 12640 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T16:14:45.591+09:00  INFO 12640 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-02-23T17:08:23.647+09:00  INFO 8236 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 8236 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T17:08:23.653+09:00  INFO 8236 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T17:08:24.531+09:00  INFO 8236 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T17:08:24.541+09:00  INFO 8236 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T17:08:24.541+09:00  INFO 8236 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T17:08:24.591+09:00  INFO 8236 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T17:08:24.591+09:00  INFO 8236 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 835 ms
+2024-02-23T17:08:24.886+09:00  INFO 8236 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T17:08:24.893+09:00  INFO 8236 --- [main] example.day11.AppStart                   : Started AppStart in 1.668 seconds (process running for 1.936)
+2024-02-23T17:08:30.672+09:00  INFO 8236 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T17:08:30.672+09:00  INFO 8236 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T17:08:30.673+09:00  INFO 8236 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-02-23T17:08:49.372+09:00  INFO 3612 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 3612 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T17:08:49.375+09:00  INFO 3612 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T17:08:50.118+09:00  INFO 3612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T17:08:50.128+09:00  INFO 3612 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T17:08:50.129+09:00  INFO 3612 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T17:08:50.175+09:00  INFO 3612 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T17:08:50.176+09:00  INFO 3612 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 762 ms
+2024-02-23T17:08:50.462+09:00  INFO 3612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T17:08:50.469+09:00  INFO 3612 --- [main] example.day11.AppStart                   : Started AppStart in 1.482 seconds (process running for 1.742)
+2024-02-23T17:08:52.044+09:00  INFO 3612 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T17:08:52.044+09:00  INFO 3612 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T17:08:52.045+09:00  INFO 3612 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-02-23T17:09:52.225+09:00  INFO 7336 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 7336 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T17:09:52.227+09:00  INFO 7336 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T17:09:53.922+09:00  INFO 7336 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T17:09:53.934+09:00  INFO 7336 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T17:09:53.934+09:00  INFO 7336 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T17:09:53.986+09:00  INFO 7336 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T17:09:53.987+09:00  INFO 7336 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1665 ms
+2024-02-23T17:09:54.293+09:00  INFO 7336 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T17:09:54.300+09:00  INFO 7336 --- [main] example.day11.AppStart                   : Started AppStart in 2.464 seconds (process running for 2.704)
+2024-02-23T17:09:57.999+09:00  INFO 7336 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T17:09:57.999+09:00  INFO 7336 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T17:09:58.000+09:00  INFO 7336 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-02-23T17:10:21.604+09:00  INFO 9784 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 9784 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T17:10:21.608+09:00  INFO 9784 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T17:10:22.409+09:00  INFO 9784 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T17:10:22.418+09:00  INFO 9784 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T17:10:22.418+09:00  INFO 9784 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T17:10:22.466+09:00  INFO 9784 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T17:10:22.467+09:00  INFO 9784 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 799 ms
+2024-02-23T17:10:22.756+09:00  INFO 9784 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T17:10:22.763+09:00  INFO 9784 --- [main] example.day11.AppStart                   : Started AppStart in 1.55 seconds (process running for 1.822)
+2024-02-23T17:10:25.332+09:00  INFO 9784 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T17:10:25.332+09:00  INFO 9784 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T17:10:25.333+09:00  INFO 9784 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-02-23T17:20:33.475+09:00  INFO 10288 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 10288 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T17:20:33.477+09:00  INFO 10288 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T17:20:34.180+09:00  INFO 10288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T17:20:34.190+09:00  INFO 10288 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T17:20:34.190+09:00  INFO 10288 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T17:20:34.238+09:00  INFO 10288 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T17:20:34.238+09:00  INFO 10288 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 723 ms
+2024-02-23T17:20:34.517+09:00  INFO 10288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T17:20:34.524+09:00  INFO 10288 --- [main] example.day11.AppStart                   : Started AppStart in 1.415 seconds (process running for 1.677)
+2024-02-23T17:20:37.086+09:00  INFO 10288 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T17:20:37.086+09:00  INFO 10288 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T17:20:37.087+09:00  INFO 10288 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-02-23T17:20:56.392+09:00  INFO 9084 --- [main] example.day11.AppStart                   : Starting AppStart using Java 17.0.9 with PID 9084 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-02-23T17:20:56.393+09:00  INFO 9084 --- [main] example.day11.AppStart                   : No active profile set, falling back to 1 default profile: "default"
+2024-02-23T17:20:57.147+09:00  INFO 9084 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-23T17:20:57.156+09:00  INFO 9084 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-23T17:20:57.156+09:00  INFO 9084 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-23T17:20:57.212+09:00  INFO 9084 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-23T17:20:57.212+09:00  INFO 9084 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 780 ms
+2024-02-23T17:20:57.492+09:00  INFO 9084 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-23T17:20:57.499+09:00  INFO 9084 --- [main] example.day11.AppStart                   : Started AppStart in 1.464 seconds (process running for 1.744)
+2024-02-23T17:21:00.334+09:00  INFO 9084 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-23T17:21:00.334+09:00  INFO 9084 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-23T17:21:00.335+09:00  INFO 9084 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

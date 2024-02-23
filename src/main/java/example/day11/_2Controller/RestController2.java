@@ -32,7 +32,7 @@ public class RestController2 {
         //응답
 //        resp.setContentType("text/html");
 //        resp.getWriter().println("안녕[클라이언트]");
-        return "안녕[클라이언트]";
+        return "안녕[클라이언트]"; // 스트링일 때만 text/plain
     }
 
     // 2. Post : post방식 localhost:8080/day11/white

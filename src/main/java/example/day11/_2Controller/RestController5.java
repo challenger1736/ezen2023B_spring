@@ -6,7 +6,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/day11")
-public class RestController5 {
+public class RestController5 { // POST 컨트롤러
 
     // 경로상의 변수(패스베어러블, 쿼리스트링) <GET,DELET,POST,PUT> 다 쓸 수 있음 //
         // 글동록, 글조회, 글삭제, 글 수정 => Get 다 가능
@@ -48,7 +48,7 @@ public class RestController5 {
 //    }
 
     @PostMapping("/ajax6")
-    public String ajax6(@RequestBody  Map<String,String> map){
+    public String ajax6(@RequestBody Map<String,String> map){
         System.out.println("RestController5.ajax6");
         System.out.println("map = " + map);
         return "응답6";

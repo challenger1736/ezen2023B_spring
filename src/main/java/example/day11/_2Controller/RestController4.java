@@ -1,5 +1,6 @@
 package example.day11._2Controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -11,7 +12,7 @@ public class RestController4 {
     @GetMapping("/ajax1")
     public String ajax1(){
         System.out.println("RestController4.ajax1");
-        return "응답1";
+        return "응답1"; // text/plain
     }
 
     @GetMapping("/ajax2/{id}/{content}")
@@ -34,15 +35,15 @@ public class RestController4 {
 
 //  2. HttpServletRequest 객체
 
-    //    @GetMapping("/ajax3")
+//        @GetMapping("/ajax3")
 //    public String ajax3(HttpServletRequest req){
 //        System.out.println("RestController4.ajax3");
-//        System.out.println("id = " + id + ", content = " + content2);
+//        System.out.println("req = " + req.toString());
 //        return "응답3";
 //    }
 
 //  3. @RequestParam map
-//    @GetMapping("ajax3")
+//    @GetMapping("/ajax3")
 //    public String ajax3(@RequestParam Map<String,String> map){
 //        System.out.println("RestController4.ajax3");
 //        System.out.println("map = " + map);
@@ -68,7 +69,7 @@ public class RestController4 {
 
 //     5. HTTP BODY 본문
     @GetMapping("/ajax4")
-        public String ajax4(Map<String,String> map){
+        public String ajax4(@RequestParam Map<String,String> map){
         System.out.println("RestController4.ajax4");
         System.out.println("map = " + map);
         return "응답4";
