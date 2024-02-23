@@ -1,0 +1,97 @@
+@ServletComponentScan
+    - 스프링 환경에서 단독적으로 사용할 때
+
+@SpringBootApplication
+    - 스프링에서 웹에 관련된 기능을 주입
+    - 1. Uses Apache Tomcat as the default embedded container 내장 아파치 톰캣 설정/실행
+        ip : 톰캣이 설치된 컴퓨터의 ip주소
+        port : 톰캣(소프트웨어) 식별번호
+            프로젝트내 src -> main -> resources -> application.properties
+                server.port = 80
+            *application.properties : 스프링 설정파일(MAP 컬렉션 프레임워크 타입)
+
+        http://192.168.17.68:80
+            - HTTP 통신 규약을 이용한 톰캣에 요청
+
+    - 2. RestAPI, Restful을 지원해줌.(GET POST PUT DELETE) // including Restful
+    - 3. application using Spring MVC(Controller, View, Model)
+        - 컴포넌트 스캔 ( * 상위 패키지의 클래스는 스캔 불가 )해서 빈(객체)를 스프링 컨테이너 등록
+            - @Controller
+            - @RestController
+            - @Component
+            .. 등등등
+
+    스프링 실행 방법
+    public static void main(String[] args) {
+            SpringApplication.run(현재클래스명.class);
+        }
+
+    Spring MVC
+        - 1.@Controller
+            - 컨트롤러 역할 : Dao와 View 사이의 통신/중계 역할
+                - 컨트롤러가 view에게 데이터(model) 또는 화면을 준다.
+                    - 서버 사이드 랜더링 : 서버가 화면을 구성해준다.
+            - 스프링MVC 아키텍처로 구성된 스프링컨테이너(저장소)에 컨트롤러 객체(빈) 등록
+
+        * HTTP 요청 매핑
+            1. @RequestMapping( value = "URL" , method = RequestMethod.XXX)
+                GET : @RequestMapping( value = "URL", method = RequestMethod.GET)
+                POST : @RequestMapping( value = "URL", method = RequestMethod.POST)
+                PUT : @RequestMapping( value = "URL", method = RequestMethod.PUT)
+                DELETE : @RequestMapping( value = "URL", method = RequestMethod.DELETE)
+
+                -  주로 : 컨트롤 안에 있는 매핑 함수들의 URL 들의 공통 매핑할 때 클래스 위에
+                @RequestMapping("/공통URL")
+
+            2.XXXMapping
+                Restful
+                Restful API --> 아래 4가지 매핑을 말하는 것
+                @PostMapping("/URL")    : 입력        C
+                @GetMapping("/URL")     : 조회        R
+                @PutMapping("/URL")     : 수정, 저장   U
+                @DeleteMapping("/URL")  : 삭제        D
+
+        * HTTP 응답
+            1. @ResponseBoby        : 응답(Response) Body(객체) : 응답 데이터를 객체로 하겠다.
+                String --> HTTP contentType --> text/plain
+                컬렉션프레임워크/배열/기본타입 --> HTTP contentType --> application/json
+
+            2. @RestController(뷰 반환 안하겠다.)
+                - @Controller + @ResponseBody 포함
+                - 컨트롤러가 view에게 데이터(model) 만 응답.
+                    - 클라이언트 사이드 랜더링 : 클라이언트가 화면을 구성한다.
+
+HTTP 가 매개변수/데이터를 보내는 방법
+    < URL 경로 >
+    1. 쿼리스트링 : URL 상의 경로상의 ?키=값&키=값을 넣어준다. // 여러개의 많은 데이터는 이게 낫고(식별이 가능하기 때문에)
+        1-1. key 와 매핑함수의 매개변수명 동일
+        1-2. @RequestParam("key") 매개변수
+        1-3. @RequestParam Map<String, String> map
+        1-4. Dto dto(단, Dto안에 필드명이 key와 동일해야한다.)
+
+
+    2. @PathVariable : 경로상의 변수 url/value/value      // 한두개 변수일 때는 PathVariable이 낫다.
+
+        *매핑 함수 Mapping("/~~URL/{매개변수명}/{매개변수명2}")
+        1. @PathVariable 매개변수
+        2. @PathVariable("ajax에서온매개변수명") 자바에서쓸매개변수명
+
+    - 사용자가 데이터를 쉽게 볼 수 있다. < 보안 상 취약해진다. > : 보안 필요없으면 가능
+
+    < http body > : http 안의 내용물을 첨부할 수 있는 보관소 form
+        POST / PUT는 주로 body를 사용 한다.                         DTO나 Map 을 쓰면 데이터 자동으로 들어옴
+            - 회원가입, 로그인등을 포스트로 해야한다. (Get은 보안상 좀 취약함.) / 글쓰기도.
+        GET / DELETE는 주로 body를 사용하지 않는다.
+            - 글 전체 목록, 글 개별 조회, 글 삭제
+
+        contentType( 요청할 시 어떤 파일로 갈 건지 )
+            1. form( ajax 기본형태 )
+                쿼리스트링
+
+            2. application/json
+                @RequestBody : JSON 타입의 데이터를 JAVA 타입으로 자동 매핑
+
+
+
+
+
