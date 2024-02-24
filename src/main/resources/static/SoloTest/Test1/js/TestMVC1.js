@@ -31,15 +31,3 @@ function doList(){ // 전체 글 출력 js
    })
 }
 
-function doCreate(){ // 글쓰기 js
-    console.log('doCreate js 함수 실행');
-
-   $.ajax({
-        url: "/SoloTest/test1/html/contentcreate",
-        method: "",
-        success : (r) => { //{}안에 실행문
-
-            }
-        }
-   })
-}

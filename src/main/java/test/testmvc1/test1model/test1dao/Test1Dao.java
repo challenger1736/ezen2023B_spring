@@ -61,7 +61,21 @@ public class Test1Dao {
     }
 
     public void contentcreate(Test1Dto dto){
-
+        System.out.println(dto.toString()); // 들어오는거 확인. dao까지왔다잉.
+        try{
+            String sql = "insert into board(btitle, bcontent, bwriter, bpw) values (?, ?, ?, ?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,dto.getBtitle());
+            ps.setString(2,dto.getBcontent());
+            ps.setString(3,dto.getBwriter());
+            ps.setString(4,dto.getBpw());
+            int count = ps.executeUpdate();
+            if (count==1){
+                System.out.println("DB 넣기 성공"); // 일단 void해놔서 리턴 필요 없고 DB도 확인해보니 성공,
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
 
