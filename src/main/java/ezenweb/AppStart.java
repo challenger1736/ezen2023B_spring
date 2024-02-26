@@ -9,3 +9,8 @@ public class AppStart {
         SpringApplication.run(AppStart.class);
     }
 }
+
+// ============================================================================= //
+
+// 홈페이지 favicon(아이콘)
+// static에다가 favicon이라는 파일로 넣어주면 됨. 확장자 .ico

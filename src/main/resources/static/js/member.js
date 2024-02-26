@@ -65,6 +65,8 @@ function login(){
                     // 4. 결과
                     if(result){
                         alert('로그인 성공');
+                        // JS 페이지 전환
+                        location.href = "/"; // 로그인 성공시 메인페이지
                     }else{
                         alert('로그인 실패');
                     }
