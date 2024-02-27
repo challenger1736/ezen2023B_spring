@@ -13,6 +13,11 @@ $.ajax({
         let html = ``;
         if(r!=''){ // 로그인 했을 때
 
+            $.ajax({url:"/member/login/info",
+            method:'get',
+            data : {id:r},
+            async: false , // 이건 동기식으로 만들어주는 느낌 , 기다려!
+            success:(r2)=>{console.log(r2); console.log(r2.uuidFile);
             html +=        `<li class="nav-item">
                                     <a class="nav-link" onclick="logout()">로그아웃</a>
                                 </li>
@@ -20,9 +25,12 @@ $.ajax({
                                     <a class="nav-link" href="/member/signup">내 정보</a>
                                 </li>
                                 <li class="nav-item">
-                                    <img src=""/>${r} 님
+                                    <img src="/img/${r2.uuidFile}" width="80px" />${r} 님
                                 </li>`
-        }else{ //로그인 안했을 때
+                                }
+                                })
+        }
+        else{ //로그인 안했을 때
             html += `<li class="nav-item">
                                              <a class="nav-link" href="/member/login">로그인</a>
                                          </li>

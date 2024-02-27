@@ -24,7 +24,10 @@ public class MemberDao extends SuperDao{
         ps.setString(3,memberDto.getName());
         ps.setString(4,memberDto.getEmail());
         ps.setString(5,memberDto.getPhone());
-        ps.setString(6,memberDto.getImg());
+//        ps.setString(6,memberDto.getImg()); // String 아니고 Multipart로 바꿔서 이렇게안됨
+        ps.setString(6,memberDto.getUuidFile()); // String 아니고 Multipart로 바꿔서 이렇게안됨
+
+
         int count = ps.executeUpdate();
         if(count == 1){ return  true; }
         } catch (Exception e){
@@ -51,5 +54,30 @@ public class MemberDao extends SuperDao{
         return false;
     }
 
+    // 3. 회원 정보 요청
+    public MemberDto doGetLoginInfo(String id){
+        MemberDto memberDto = null;
+        try{
+            String sql = "select * from member where id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                memberDto = new MemberDto(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    null, //
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    null, // 첨부파일 필드 빼고
+                    rs.getString(7)
+                );
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return memberDto;
+    }
 
 }

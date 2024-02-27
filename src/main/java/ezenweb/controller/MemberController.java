@@ -3,6 +3,7 @@ package ezenweb.controller;
 import ezenweb.model.dao.MemberDao;
 import ezenweb.model.dto.LoginDto;
 import ezenweb.model.dto.MemberDto;
+import ezenweb.service.MemberService;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.UUID;
 
 @Controller
 //@RestController // 이거 쓰면 자동으로 ResponseBody됨(데이터/값)을 보내게 됨.
 public class MemberController {
     @Autowired
     private MemberDao memberDao;
+    @Autowired
+    private MemberService memberService;
 
     // 1단계. V<---------->C 사이의 HTTP 통신 방식 설계
     // 2단계. Controller mapping 체크 (API Tester하고 3단계로 넘어 갈 예정)
@@ -38,12 +45,61 @@ public class MemberController {
         }
 
          */
+        // 첨부파일 MulitpartFile 타입
+        MultipartFile 첨부파일 = memberDto.getImg();
+        System.out.println(첨부파일); // 첨부파일의 객체의 주소
+        System.out.println(첨부파일.getSize()); // 첨부파일 용량 : ~~~~바이트
+        System.out.println(첨부파일.getContentType()); // image/png : 첨부파일의 확장자
+        System.out.println(첨부파일.getOriginalFilename()); // logo.png : 첨부파일의 이름(확장자 포함)
+        System.out.println(첨부파일.getName()); // img : form input name
 
-        System.out.println("MemberController.signup"); // API로 통신하고, 되는지 안되는지 확인용. 404 오류 뜨더라도 이건 나옴
+        // 서버에 업로드 했을때 설계
+            // 1. 여러 클라이언트가 동일한 파일명으로 서버[1명]에게 업로드 했을 때 ===> 식별 깨짐
+                // 식별이름(주로) : 1. 날짜조합 + 식별번호
+            // 2. 클라이언트 화면 표시
+                // 업로드 경로 : 아파치 톰캣( static )을 해야 됨, 아니면 서버 리빌드(재시작)해야함.
+        /*
 
-        boolean result = MemberDao.getInstance().doPostSignup(memberDto);
-        System.out.println(result);
-        return result;
+            클라이언트 ------------> 톰캣(서버) <------build------- 개발자
+                         요청                       컴파일         코드
+                     <-----------
+
+        */
+
+        // * 업로드 할 경로 설정 (내장 톰캣의 경로)
+//        String uploadPath =  "C:\\Users\\504\\Desktop\\ezen2023B_spring\\build\\resources\\main\\static\\img";
+//        String uuid = UUID.randomUUID().toString(); // 산수생성 UUID!!
+//        System.out.println("uuid = "+ uuid);
+//        // * 파일 이름 조합하기 : 새로운 식별이름과 실제 파일 이름
+//            // 식별키와 실제 이름 구분 : 왜? 나중에 쪼개서 구분하려고 [ 다운로드시 식별키 빼고 제공하려고 ]
+//            // 혹시나 파일 이름이 구분문자 가 있을 경우 기준이 깨짐.
+//                // .replaceAll() : 문자열 치환/교체
+//        String filename = uuid+"_"+memberDto.getImg().getOriginalFilename().replaceAll("_","-"); //이걸 다 바꾸게.
+//        memberDto.setUuidFile(filename); // 어차피 파일은 대개 고정이므로 filename만 있으면 됨,
+//
+//        // 1. 첨부파일 업로드 하기. [업로드란: 클라이언트의 바이트(대용량/파일)을 서버로 복사]
+//            // 1. 첨부파일을 저장할 경로
+//                // File 클래스 : 파일 관련된 메소드 제공
+//                // new File(파일경로)
+////        File file = new File("c:\\java\\"+첨부파일.getOriginalFilename());
+//
+//        File file = new File(uploadPath+filename);
+//        System.out.println("file ="+file); // c:\java\file명
+//        System.out.println("file.exists() ="+file.exists()); // 파일 존재 안하고 true/false로 나옴.
+//
+//            // 2. [무엇을] 첨부파일 객체
+//                // transferTo(경로) 경로: Path나 File 클래스로 줘야한다고 자바가 정해놓음.
+//        try{ memberDto.getImg().transferTo(file);}
+//        catch (Exception e){
+//            System.out.println(e);
+//        }
+        // 이 부분 Service로 넘기기( 자주 쓸 예정이라 )
+
+//        System.out.println("MemberController.signup"); // API로 통신하고, 되는지 안되는지 확인용. 404 오류 뜨더라도 이건 나옴
+//
+//        boolean result = MemberDao.getInstance().doPostSignup(memberDto);
+//        System.out.println(result);
+        return memberService.doPostSignup(memberDto);
     }
 
     // * Http 요청 객체
@@ -63,7 +119,9 @@ public class MemberController {
         System.out.println("MemberController.login"); // API로 통신하고, 되는지 안되는지 확인용. 404 오류 뜨더라도 이건 나옴
         boolean result = MemberDao.getInstance().doPostLogin(loginDto); // Dao 처리
         if(result){ // 로그인 성공이면,
+            // 세션에 저장할 내용물들을 구성( 식별키 만 넣어도된다. )
             request.getSession().setAttribute("loginDto",loginDto.getId()); // loginDto id 넣기
+
         }
         
         //  * 로그인 성공시
@@ -105,6 +163,15 @@ public class MemberController {
         return true; // 로그아웃 성공시 대다수가 로그인 페이지 이동
 
     }
+
+    // 3. =================== 회원 정보 요청 (로그인 된 회원 요청) ==================== // 패스워드 제외한 개인정보 불러오기
+    @GetMapping("/member/login/info")
+    @ResponseBody
+    public MemberDto doGetLoginInfo(String id){
+        return memberService.doGetLoginInfo(id);
+
+    }
+
 
     // 3. =================== 회원가입 페이지 요청 =====================
     @GetMapping("/member/signup") // 같은 주소라도 메소드가 Get이냐 Post냐 Put이냐 Delete냐에 따라 다르게, 쓰는 것이 됨!! 신기하네,

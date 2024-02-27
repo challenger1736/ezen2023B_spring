@@ -51,10 +51,18 @@
 
 #login_menu{
     display: flex;
-   
+    align-items: center;
 }
 
 #login_menu > li{
     margin: 0 10px;
 }
 
+.nav-item > img{
+    border-radius : 50%;
+}
+
+#login_menu > li:nth-child(3) > img{
+    width:60px
+    border-radius : 50%;
+}

@@ -3,20 +3,26 @@
     <h1>회원가입 페이지</h1>
 
 
-    <form>
+    <form class="signUpForm">
     <!-- {resources/static} / js/member.js -->
 
-    <div action="signup" method="post">
-        <span>아이디 : </span><input id="id"/><br/>
-        <span>비밀번호 : </span><input type="password" id="pw"/><br/>
-        <span>비밀번호 : </span><input type="password" id="pwconfirm"/><br/>
-        <span>이름 : </span><input id="name"/><br/>
-        <span>전화번호 : </span><input id="phone"/><br/>
-        <span>이메일 : </span><input id="email"/><br/>
-        <span>프로필 사진 : </span><input id="img"/><br/>
+<!--    <div action="signup" method="post">-->
+        <span>아이디 : </span><input id="id" name="id"/><br/>
+        <span>비밀번호 : </span><input type="password" id="pw" name="pw"/><br/>
+        <span>비밀번호 : </span><input type="password" id="pwconfirm" name="pwconfirm"/><br/>
+        <span>이름 : </span><input id="name" name="name"/><br/>
+        <span>전화번호 : </span><input id="phone" name="phone"/><br/>
+        <span>이메일 : </span><input id="email" name="email"/><br/>
+        <span>프로필 사진 : </span>
+        <input onchange="onpreimg(this)" type="file" id="img" name="img" accept="image/*"/><br/>
+        <!-- image 관련된 것만 받는다는 소리 -->
+        <div> <!-- 첨부파일 미리보기 -->
+                <img id="preimg" src="" />
+        </div>
         <button type="button" onclick="signup()">회원가입</button>
         <a href="/member/login">로그인</a>
-    </div>
+
+<!--    </div>-->
 
     </form>
 
