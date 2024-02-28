@@ -19,12 +19,18 @@
         <div>이름 </div>
         <input onkeyup="namecheck()" id="name" name="name"/><br/>
         <div class="namecheckbox">유효성 검사 결과 </div>
+
         <div> 전화번호 </div>
         <input onkeyup="phonecheck()" id="phone" name="phone"/><br/>
+        <div class="phonecheckbox">유효성 검사 결과 </div>
+
         <div> 이메일 </div>
         <input onkeyup="emailcheck()" id="email" name="email"/><br/>
+        <div class="emailcheckbox">유효성 검사 결과 </div>
+
         <div> 프로필 사진 </div>
         <input onchange="onpreimg(this)" type="file" id="img" name="img" accept="image/*"/><br/>
+
         <!-- image 관련된 것만 받는다는 소리 -->
         <div> <!-- 첨부파일 미리보기 -->
                 <img id="preimg" src="/img/defaultImg.jpg" />

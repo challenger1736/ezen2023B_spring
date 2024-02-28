@@ -63,7 +63,7 @@ function phonecheck(){
     let msg = '000-0000-00000 또는 00-000-0000';
     checkArray[3] = false;
     if(전화번호규칙.test(phone)){
-        msg = '통과 '; checkArray=[3] = true;
+        msg = '통과 '; checkArray[3] = true;
     }
     document.querySelector('.phonecheckbox').innerHTML = msg;
 
