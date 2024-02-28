@@ -60,7 +60,7 @@ function emailcheck(){
 //7. 전화번호 유효성 검사 000-0000-0000 또는 00-000-0000
 function phonecheck(){
     let phone = document.querySelector('#phone').value;
-    let 전화번호규칙 = /^ ([0-9]{2,3})+[-]+([0,9]{3,4})+[-]+([0-9]{4})$/ // [-]?면 들어가도되고 안들어가도되고
+    let 전화번호규칙 = /^([0-9]{2,3})+[-]+([0-9]{3,4})+[-]+([0-9]{4})$/ // [-]?면 들어가도되고 안들어가도되고
     let msg = '000-0000-0000 또는 00-000-0000';
     checkArray[3] = false;
     if(전화번호규칙.test(phone)){
@@ -172,10 +172,10 @@ function idcheck(){
 
 // 1. 회원가입
 function signup(){
-
+    console.log(checkArray);
     // * 유효성 검사 체크 현황중에 하나라도 false이면 회원가입 금지
     for(let i =0; i<checkArray.length;i++){
-        if(checkArray[i]){  // false 가 있으면 나가버렸!
+        if(!checkArray[i]){  // false 가 있으면 나가버렸!
             alert('입력사항들을 모두 정확히 입력해주세요.')
             return;
         }
