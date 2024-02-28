@@ -13,6 +13,8 @@ public class MemberService {
     @Autowired
     private MemberDao memberDao; // 외부 리포지토리
 
+    @Autowired
+    private EmailService emailService;
 
     // 1. 회원가입 서비스
     public boolean doPostSignup(MemberDto memberDto){
@@ -34,7 +36,10 @@ public class MemberService {
             }
         }
         memberDto.setUuidFile(fileName);
-        return memberDao.doPostSignup(memberDto); // 사진이 있든 없든 DB 처리는 해야함,
+        boolean result = memberDao.doPostSignup(memberDto);
+        // * 이메일 테스트
+        if(result){ emailService.send(); }
+        return result; // 사진이 있든 없든 DB 처리는 해야함,
 
     }
 
