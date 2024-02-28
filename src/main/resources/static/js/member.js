@@ -16,12 +16,110 @@ console.log('member.js')
          {최소길이,최대길이 } : 문자 길이 규칙
          [허용할 문자]  : 허용 문자 규칙
             [a-z]       : 소문자 a~z 허용
-            [a-zA-z]    : 대소문자 a~z 허용
-            [a-zA-z0-9] : 대소문자 a~z 허용, 숫자허용
-            [a-zA-z0-9가-힣] : 대소문자 a~z 허용, 숫자허용, 한글허용
+            [A-Z]       : 대문자 A~Z 허용
+            [!@#$]      : 특정 특수문자 허용
+            [a-zA-Z]    : 대소문자 a~z 허용
+            [a-zA-Z0-9] : 대소문자 a~z 허용, 숫자허용
+            [a-zA-Z0-9가-힣] : 대소문자 a~z 허용, 숫자허용, 한글허용
+            [ac]            : a또는 c 허용
+            +               : 앞에 있는 패턴 1개이상 반복// = 뜻 : 앞의 문구는 한 개이상 넣어라.
+            ?               : 앞에 있는 패턴 0개 혹은 1개 이상 반복
+            *               : 앞에 있는 패턴 0개 반복   
+            (?=.*[1개이상 문자 패턴])[]{}
+            .               : 1개의 문자를 뜻함 // 이래서 이런애들을 쓰려면 \ 백슬래시를 써야한다.
+            예) 1개 이상 필수
+                (?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{5,30}
+
+            예) 000-0000-0000 또는 00-000-0000
+            let 폰규칙 = /^ ([0-9]{2,3})+[-]+([0,9]{3,4})+[-]+[0-9]{4}$/ [-]?
+
+            예) 문자열@문자.문자
+            qwe@naver.com
+            asdas@kakao.net
+                /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+\.[a-zA-Z]+$/
+
+            ()              : 패턴의 그룹
+            ?=.             : 문자열 패턴 안에 어딘가에 존재하면 가능,
 */
 // ******* 현재 유효성 검사 체크 현황
 let checkArray = [false,false,false,false,false]; // 아이디, 비밀번호, 이름 , 전화번호 , 이메일
+//8. 이메일 유효성 검사, 문자열@문자.문자
+function emailcheck(){
+    let email = document.querySelector('#email').value;
+    let 이메일규칙 =  /^[a-zA-Z0-9]+@+[a-zA-Z0-9_-]+\.[a-zA-Z]+$/
+    let msg = '아이디@도메인 입력해주세요.'
+    checkArray[4] = false;
+    if(이메일규칙.test(email)){
+        checkArray[4] = true;
+    }
+    document.querySelector('.emailcheckbox').innerHTML = msg;
+}
+
+
+//7. 전화번호 유효성 검사 000-0000-0000 또는 00-000-0000
+function phonecheck(){
+    let phone = document.querySelector('#phone').value;
+    let 전화번호규칙 = /^ ([0-9]{2,3})+[-]+([0,9]{3,4})+[-]+([0-9]{4})$/ // [-]?면 들어가도되고 안들어가도되고
+    let msg = '000-0000-00000 또는 00-000-0000';
+    checkArray[3] = false;
+    if(전화번호규칙.test(phone)){
+        msg = '통과 '; checkArray=[3] = true;
+    }
+    document.querySelector('.phonecheckbox').innerHTML = msg;
+
+}
+
+
+//6. 이름 유효성 검사 (입력 시 마다)
+function namecheck(){
+    let name = document.querySelector('#name').value; // 1. 입력값 가져온다
+    let 이름규칙 = /^[가-힣]{5,20}$/            // 2. 정규표현식을 작성한다.
+    let msg = ''; checkArray[2] = false;
+    if(이름규칙.test(name)){                    // 3. 정규표현식을 검사한다.
+        msg ='통과';                            // 4. 정규 표션식 검사가 일치했을 때,
+        checkArray[2] = true;
+    }else{
+        msg = '한글 5~20 글자'
+    }
+    document.querySelector('.namecheckbox').innerHTML = msg;
+
+}
+
+
+
+//5. pwconfirm 유효성 검사 (입력 시 마다)
+function pwcheck(){
+    console.log('pwcheck() 실행')
+    // 1. 입력값 가져온다
+    let pw = document.querySelector('#pw').value;
+    let pwconfirm = document.querySelector('#pwconfirm').value;
+
+    // 2. 유효성 검사
+    let msg = "통과";
+        // 1. 비밀번호 에 대한 정규 표현식
+    let 비밀번호규칙 = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{5,30}$/ // 영대소문자 1개 필수와 숫자 1개 필수의 조합 5~30글자
+        // 2.
+        if(비밀번호규칙.test(pw)){ //비밀번호 검사
+            msg = "표현식 일치" // 있으나 마나
+            // 3.
+                // 4.
+                if(pw==pwconfirm){ 
+                    msg="통과";
+                    checkArray[1]=true;
+                }else{
+                    msg="패스워드 불일치"
+                    checkArray[1]=false;
+                }
+           
+        }else{
+            msg = "영대소문자 1개 필수와 숫자 1개 필수의 조합 5~30글자로 넣어주세요";
+            checkArray[1]=false;
+        }
+
+    //
+    document.querySelector('.pwcheckbox').innerHTML = msg;
+
+}
 
 
 

@@ -9,18 +9,25 @@
     <!-- {resources/static} / js/member.js -->
 
 <!--    <div action="signup" method="post">-->
-        <div>아이디 : </div><input onkeyup="idcheck()" id="id" name="id"/>
-        <div class="idcheckbox">유효성 검사 결과 : </div>
-        <span>비밀번호 : </span><input type="password" id="pw" name="pw"/><br/>
-        <span>비밀번호 : </span><input onkeyup="pwconfirmcheck()" type="password" id="pwconfirm" name="pwconfirm"/><br/>
-        <span>이름 : </span><input id="name" name="name"/><br/>
-        <span>전화번호 : </span><input id="phone" name="phone"/><br/>
-        <span>이메일 : </span><input id="email" name="email"/><br/>
-        <span>프로필 사진 : </span>
+        <div>아이디 </div><input onkeyup="idcheck()" id="id" name="id"/>
+        <div class="idcheckbox">유효성 검사 결과 </div>
+        <div>비밀번호</div>
+        <input onkeyup="pwcheck()" type="text" id="pw" name="pw"/><br/>
+        <div>비밀번호 확인 </div>
+        <input onkeyup="pwcheck()" type="text" id="pwconfirm" name="pwconfirm"/><br/>
+        <div class="pwcheckbox">유효성 검사 결과 </div>
+        <div>이름 </div>
+        <input onkeyup="namecheck()" id="name" name="name"/><br/>
+        <div class="namecheckbox">유효성 검사 결과 </div>
+        <div> 전화번호 </div>
+        <input onkeyup="phonecheck()" id="phone" name="phone"/><br/>
+        <div> 이메일 </div>
+        <input onkeyup="emailcheck()" id="email" name="email"/><br/>
+        <div> 프로필 사진 </div>
         <input onchange="onpreimg(this)" type="file" id="img" name="img" accept="image/*"/><br/>
         <!-- image 관련된 것만 받는다는 소리 -->
         <div> <!-- 첨부파일 미리보기 -->
-                <img id="preimg" src="" />
+                <img id="preimg" src="/img/defaultImg.jpg" />
         </div>
         <button type="button" onclick="signup()">회원가입</button>
         <a href="/member/login">로그인</a>
