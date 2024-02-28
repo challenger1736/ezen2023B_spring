@@ -4,6 +4,7 @@ import ezenweb.model.dao.MemberDao;
 import ezenweb.model.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class MemberService {
@@ -44,4 +45,10 @@ public class MemberService {
         // 1. DAO 호출
         return memberDao.doGetLoginInfo(id);
     }
+
+    // 4.  ============= 아이디 중복 체크 요청 =============
+    public boolean doGetFindIdCheck( String id){
+        return memberDao.doGetFindIdCheck(id);
+    }
+
 }

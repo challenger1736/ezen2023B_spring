@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -170,6 +167,16 @@ public class MemberController {
     public MemberDto doGetLoginInfo(String id){
         return memberService.doGetLoginInfo(id);
 
+    }
+
+    // 4. ==================== 아이디 중복 체크 요청 =====================
+    @GetMapping("/member/find/idcheck")
+    @ResponseBody
+    public boolean doGetFindIdCheck(@RequestParam String id){
+        System.out.println("MemberController.doGetFindIdCheck");
+        System.out.println("id = " + id);
+
+        return memberService.doGetFindIdCheck(id);
     }
 
 

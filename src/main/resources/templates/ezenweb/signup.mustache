@@ -3,13 +3,16 @@
     <h1>회원가입 페이지</h1>
 
 
-    <form class="signUpForm">
+    <form class="signUpForm"  >
+        <!-- enctype="multipart/form-data" 이런식으로 인코딩 타입해줄수 있음, 이건 대용량-->
+        <!-- enctype="application/x-www-form-urlencoded" 이런식으로 인코딩 타입해줄수 있음, 이건 대용량 -->
     <!-- {resources/static} / js/member.js -->
 
 <!--    <div action="signup" method="post">-->
-        <span>아이디 : </span><input id="id" name="id"/><br/>
+        <div>아이디 : </div><input onkeyup="idcheck()" id="id" name="id"/>
+        <div class="idcheckbox">유효성 검사 결과 : </div>
         <span>비밀번호 : </span><input type="password" id="pw" name="pw"/><br/>
-        <span>비밀번호 : </span><input type="password" id="pwconfirm" name="pwconfirm"/><br/>
+        <span>비밀번호 : </span><input onkeyup="pwconfirmcheck()" type="password" id="pwconfirm" name="pwconfirm"/><br/>
         <span>이름 : </span><input id="name" name="name"/><br/>
         <span>전화번호 : </span><input id="phone" name="phone"/><br/>
         <span>이메일 : </span><input id="email" name="email"/><br/>
