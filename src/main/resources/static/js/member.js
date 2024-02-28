@@ -50,6 +50,7 @@ function emailcheck(){
     let msg = '아이디@도메인 입력해주세요.'
     checkArray[4] = false;
     if(이메일규칙.test(email)){
+        msg = '통과';
         checkArray[4] = true;
     }
     document.querySelector('.emailcheckbox').innerHTML = msg;
@@ -60,10 +61,11 @@ function emailcheck(){
 function phonecheck(){
     let phone = document.querySelector('#phone').value;
     let 전화번호규칙 = /^ ([0-9]{2,3})+[-]+([0,9]{3,4})+[-]+([0-9]{4})$/ // [-]?면 들어가도되고 안들어가도되고
-    let msg = '000-0000-00000 또는 00-000-0000';
+    let msg = '000-0000-0000 또는 00-000-0000';
     checkArray[3] = false;
     if(전화번호규칙.test(phone)){
-        msg = '통과 '; checkArray[3] = true;
+        msg = '통과';
+        checkArray[3] = true;
     }
     document.querySelector('.phonecheckbox').innerHTML = msg;
 
