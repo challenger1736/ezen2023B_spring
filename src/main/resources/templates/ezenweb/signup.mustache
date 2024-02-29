@@ -1,43 +1,53 @@
 {{>ezenweb/header}}
-
-    <h1>회원가입 페이지</h1>
+<div class="cotainer">
+<!--    부트스트랩이 사이즈를 알아서 잡아준다.  -->
 
 
     <form class="signUpForm"  >
+        <h3>회원가입 페이지</h3>
+        <p>회원가입을 통해 다양한 이벤트에 참여하세요.</p>
         <!-- enctype="multipart/form-data" 이런식으로 인코딩 타입해줄수 있음, 이건 대용량-->
         <!-- enctype="application/x-www-form-urlencoded" 이런식으로 인코딩 타입해줄수 있음, 이건 대용량 -->
     <!-- {resources/static} / js/member.js -->
 
 <!--    <div action="signup" method="post">-->
-        <div>아이디 </div><input onkeyup="idcheck()" id="id" name="id"/>
-        <div class="idcheckbox">유효성 검사 결과 </div>
-        <div>비밀번호</div>
+        <div class="label">아이디 </div><input onkeyup="idcheck()" id="id" name="id"/>
+        <div class="idcheckbox checkbox"> </div>
+        <div class="label">비밀번호</div>
         <input onkeyup="pwcheck()" type="text" id="pw" name="pw"/><br/>
-        <div>비밀번호 확인 </div>
+        <div class="label">비밀번호 확인 </div>
         <input onkeyup="pwcheck()" type="text" id="pwconfirm" name="pwconfirm"/><br/>
-        <div class="pwcheckbox">유효성 검사 결과 </div>
-        <div>이름 </div>
+        <div class="pwcheckbox checkbox"></div>
+        <div class="label">이름 </div>
         <input onkeyup="namecheck()" id="name" name="name"/><br/>
-        <div class="namecheckbox">유효성 검사 결과 </div>
+        <div class="namecheckbox checkbox"></div>
 
-        <div> 전화번호 </div>
+        <div class="label"> 전화번호 </div>
         <input onkeyup="phonecheck()" id="phone" name="phone"/><br/>
-        <div class="phonecheckbox">유효성 검사 결과 </div>
+        <div class="phonecheckbox checkbox"></div>
 
-        <div> 이메일 </div>
-        <input onkeyup="emailcheck()" id="email" name="email"/><br/>
-        <div class="emailcheckbox">유효성 검사 결과 </div>
+        <div class="label"> 이메일 </div>
+        <div class="emailbox">
+            <input onkeyup="emailcheck()" id="email" name="email"/>
+            <button type="button" class="authreqbtn" onclick="authreq()" disabled>인증요청</button>
+<!--            form 안에서 button type 안넣으면 submit 되서 폼 전송이 됨.-->
+        </div>
+
+        <div class="authbox"> </div>
+
+        <div class="emailcheckbox checkbox"></div>
 
         <div> 프로필 사진 </div>
         <input onchange="onpreimg(this)" type="file" id="img" name="img" accept="image/*"/><br/>
 
         <!-- image 관련된 것만 받는다는 소리 -->
-        <div> <!-- 첨부파일 미리보기 -->
+        <div class="preimgbox"> <!-- 첨부파일 미리보기 -->
                 <img id="preimg" src="/img/defaultImg.jpg" />
         </div>
-        <button type="button" onclick="signup()">회원가입</button>
+        <button class="signupbtn" type="button" onclick="signup()">회원가입</button>
+        <div class="signupbtn">
         <a href="/member/login">로그인</a>
-
+        </div>
 <!--    </div>-->
 
     </form>
@@ -46,5 +56,5 @@
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/js/member.js"></script>
 
-
+</div>
 {{>ezenweb/footer}}

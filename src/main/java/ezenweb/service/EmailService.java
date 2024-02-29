@@ -40,7 +40,7 @@ public class EmailService { // SMTP란? Simple Mail Tranfer Protocol의 약자�
     // java(spring) 지원하는 smtp 객체 필요 (= javaMailSender)
     @Autowired
     private JavaMailSender smtp; // 다른 함수에서도 쓰려고.
-    public void send(){
+    public void send( String toEmail , String subject, String content ){ // toEmail 보낼 사람 지정해주기
         try{
             MimeMessage message = smtp.createMimeMessage();
             // 1. 메시지 구성
@@ -49,10 +49,10 @@ public class EmailService { // SMTP란? Simple Mail Tranfer Protocol의 약자�
             // 2. 메시지 보내는 사람
             mimeMessageHelper.setFrom("challenge173@naver.com"); // 관리자 이메일(회사 이메일 느낌)
             // 3. 메시지 받는 사람
-            mimeMessageHelper.setTo("challenger1736@gmail.com"); // 클라이언트(회원) 이메일 (매개변수)
+            mimeMessageHelper.setTo(toEmail); // 클라이언트(회원) 이메일 (매개변수)
             // 4. 메시지 제목
-            mimeMessageHelper.setSubject("자바에서 보내온 메세지 제목"); // (매개변수)
-            mimeMessageHelper.setText("자바에서 보내온 메세지 내용"); // (매개변수)
+            mimeMessageHelper.setSubject(subject); // (매개변수)
+            mimeMessageHelper.setText(content); // (매개변수)
             // 메일 전송
             smtp.send(message);
         }catch (Exception e){

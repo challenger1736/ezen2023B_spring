@@ -42,6 +42,9 @@ console.log('member.js')
             ?=.             : 문자열 패턴 안에 어딘가에 존재하면 가능,
 */
 // ******* 현재 유효성 검사 체크 현황
+
+
+
 let checkArray = [false,false,false,false,false]; // 아이디, 비밀번호, 이름 , 전화번호 , 이메일
 //8. 이메일 유효성 검사, 문자열@문자.문자
 function emailcheck(){
@@ -49,9 +52,10 @@ function emailcheck(){
     let 이메일규칙 =  /^[a-zA-Z0-9]+@+[a-zA-Z0-9_-]+\.[a-zA-Z]+$/
     let msg = '아이디@도메인 입력해주세요.'
     checkArray[4] = false;
+    authreqbtn.disabled = true;
     if(이메일규칙.test(email)){
-        msg = '통과';
-        checkArray[4] = true;
+        authreqbtn.disabled = false; // 유효성 검사 맞으면 disable 안되게
+        msg = '인증요청 가능';
     }
     document.querySelector('.emailcheckbox').innerHTML = msg;
 }
@@ -120,6 +124,112 @@ function pwcheck(){
 
     //
     document.querySelector('.pwcheckbox').innerHTML = msg;
+
+}
+let timer = 180; // 인증 시간
+// 1. 인증 구역
+let authbox = document.querySelector('.authbox');
+
+let authreqbtn = document.querySelector('.authreqbtn'); // 인증요청 버튼
+// 9. 인증요청
+function authreq( object ){
+
+
+    // 2. 인증 구역 구성(html에서 실험)
+    let html = `<span class="timebox"> 00분00초 </span>
+                            <input type="text" class="ecodeinput"/>
+                            <button onclick="auth()" type="button">인증</button>`;
+    // 3. 인증 구역 출력
+    authbox.innerHTML = html;
+
+    // ======== 자바에게 인증 요청 ===============
+    $.ajax({
+        url : "/auth/email/req",
+        method : "get",
+        data : {"email": document.querySelector('#email').value},
+        success : (r) => {
+            if(r){
+                // 4. 타이머 함수 실행
+                      timer = 10;
+                      ontimer(); // 타이머 함수 실행
+                      // 해당 버튼 사용 금지
+                  //    console.log(object) //html에서 전달한 js의 this로 object 확인 (this로 >> js에서 object 매개변수를 쓸 때)
+                      authreqbtn.disabled = true;
+            }else{
+                alert('관리자에게 문의')
+            }
+        }
+    })
+
+    // ==============
+
+}
+
+let timerInter = null; // ontimer 안에 있다가 전역으로 빼줌. 딴데서도 쓰려고,
+// 10. 타이머 함수
+function ontimer(){
+// 테스트
+    // 정의 : setInterval(함수, 밀리초) : 특정 밀리초마다 함수 실행.
+    // 종료 : clearInterval(종료할Interval변수) : 종료할 Interval의 변수 대입.
+//let time = 0;
+    timerInter = setInterval(()=>{
+    // 1. 현재 날짜/시간
+    //    let today = new Date();
+    // 2. 타이머 리미트
+
+    // 2-1 .이 타이머를 분 초로 나누기,
+    let m = parseInt(timer/60); //분
+    let s = parseInt(timer%60); //분을 제외한 초
+    // 2-2. 시간을 두 자릿수로 표현
+    m = m < 10? "0"+m : m; // 8분 -> 08분
+    s = s < 10? "0"+s : s; // 3초 -> 03초
+    // 2-3. 출력
+    document.querySelector('.timebox').innerHTML = `${m}분${s}초`;
+    // 2-4. 초 감소
+    timer--;
+    // 2-5. 만약에 초가 0보다 작아지면
+    if(timer<0){    //
+        clearInterval(timerInter); // 이거 멈추려고 함수를 timerInter라는 변수에 저장해 둠
+        authbox.innerHTML = `인증 시간 경과`;
+        authreqbtn.disabled = false;
+
+    }
+
+},1000);
+
+
+}
+// 11. 인증함수
+function auth(){
+    // 1. 내가 입력한 인증번호
+    let ecodeinput = document.querySelector('.ecodeinput').value;
+
+    // ===========내가 입력한 인증번호를 자바에게 보내기============== //
+
+    $.ajax({
+        url : "/auth/email/check",
+        method : "get", // 보안이 필요한 건 없으니까
+        data : {'ecodeinput':  ecodeinput},
+        success : (r) => {
+        // 3. 성공시 / 실패시
+         if(r){
+            checkArray[4] = true;
+            document.querySelector('.emailcheckbox').innerHTML = '통과';
+            clearInterval(timerInter); // 음?
+            authbox.innerHTML = ``; // 인증 구역 없애기
+            authreqbtn.disabled = false; // 해당 버튼 사용
+         }else{
+                alert('인증번호가 다릅니다. 또는 인증세션 시간 초과');
+         }
+
+        }
+
+    })
+    let result = true;
+    // ========================= //
+
+
+
 
 }
 

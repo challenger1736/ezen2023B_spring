@@ -38,7 +38,7 @@ public class MemberService {
         memberDto.setUuidFile(fileName);
         boolean result = memberDao.doPostSignup(memberDto);
         // * 이메일 테스트
-        if(result){ emailService.send(); }
+//        if(result){ emailService.send(); }
         return result; // 사진이 있든 없든 DB 처리는 해야함,
 
     }

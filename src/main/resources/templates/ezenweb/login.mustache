@@ -1,12 +1,13 @@
 {{>ezenweb/header}}
-    <h1>로그인 페이지</h1>
-    <div action="signup" method="post">
+<div class="container">
+    <h3>로그인 페이지</h3>
+    <div id="login" action="signup" method="post">
         <span>아이디 : </span><input id="id"/><br/>
         <span>비밀번호 : </span><input type="password" id="pw"/><br/>
         <a href="/member/signup">회원가입</a>
         <button type="button" onclick="login()">로그인</button>
     </div>
-
+</div>
 
     <script src="/js/member.js"></script>
 {{>ezenweb/footer}}
