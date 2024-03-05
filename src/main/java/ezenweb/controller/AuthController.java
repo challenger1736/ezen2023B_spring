@@ -39,7 +39,7 @@ public class AuthController {
             // 2-1. 세션에 속성 추가해서 발급된 인증코드 대입하기
         request.getSession().setAttribute("ecode", ecode);
             // 2-2. 세선에 생명주기 추가하기 .setMaxInactiveInterval
-        request.getSession().setMaxInactiveInterval(10); // 초 기준 // test 라서 10초 동안 세션유지하고 10초후 삭제
+        request.getSession().setMaxInactiveInterval(180); // 초 기준 // test 라서 10초 동안 세션유지하고 10초후 삭제
         // 3. 발급된 인증코드를 인증할 이메일로 전송
         emailService.send(email,"EZEN웹 WEB 인증코드", "인증코드 : ["+ecode+"]입니다");
         return true;

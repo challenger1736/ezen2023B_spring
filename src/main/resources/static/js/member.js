@@ -150,7 +150,7 @@ function authreq( object ){
         success : (r) => {
             if(r){
                 // 4. 타이머 함수 실행
-                      timer = 10;
+                      timer = 180;
                       ontimer(); // 타이머 함수 실행
                       // 해당 버튼 사용 금지
                   //    console.log(object) //html에서 전달한 js의 this로 object 확인 (this로 >> js에서 object 매개변수를 쓸 때)

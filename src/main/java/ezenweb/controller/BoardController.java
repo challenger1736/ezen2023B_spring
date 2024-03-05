@@ -1,12 +1,15 @@
 package ezenweb.controller;
 
 import ezenweb.model.dto.BoardDto;
+import ezenweb.model.dto.BoardPageDto;
 import ezenweb.service.BoardService;
 import ezenweb.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/board") // 공통 URL
@@ -24,11 +27,11 @@ public class BoardController {
     // 1. 글쓰기 처리            /board/write.do POST            // Dto 필요
     @PostMapping("/write.do")
     @ResponseBody
-    public boolean doPostBoardWrite(BoardDto boardDto){
+    public long doPostBoardWrite(BoardDto boardDto){
         System.out.println("BoardController.doPostBoardWrite");
         // 1. 현재 로그인된 세션(브라우저 마다 톰캣서버내(자바, JVM) 저장소) 호출
         Object object = request.getSession().getAttribute("loginDto");
-        if(object == null){return false;}
+        if(object == null){return -2;} // 세션없다 비로그인,
         // 2.
         String mid = (String) object;
         // 3. mid를 mno로 바꾸기
@@ -39,7 +42,12 @@ public class BoardController {
         return boardService.doPostBoardWrite(boardDto);
     }
     // 2. 전체 글 출력 호출       /board.do   GET -- 호출 이니까    페이징처리, 검색 기능
-
+    @GetMapping("/do")
+    @ResponseBody
+    public BoardPageDto doGetBoardViewList(int page){ // 매개변수 : 현재 페이지
+        System.out.println("BoardController.doGetBoardViewList");
+        return boardService.doGetBoardViewList(page);
+    }
     // 3. 개별 글 출력 호출        /board/view.do GET -- 호출이니까 // 게시물 번호 필요
     @GetMapping("/view.do")
     @ResponseBody
@@ -67,6 +75,10 @@ public class BoardController {
     }
 
     // 3. 게시판 상세 페이지 이동     /board/view   GET
+    @GetMapping("/view")
+    public String getBoardView(int bno){
+        return "ezenweb/board/view";
+    }
 
     // 4. 글 수정 페이지 이동       /board/update GET
 }

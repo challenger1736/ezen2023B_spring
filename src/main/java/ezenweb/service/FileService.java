@@ -42,7 +42,7 @@ public class FileService {
 
         // 2. [무엇을] 첨부파일 객체
         // transferTo(경로) 경로: Path나 File 클래스로 줘야한다고 자바가 정해놓음.
-        try{ multipartFile.transferTo(file);}
+        try{ multipartFile.transferTo(file);} //실제로 서버에 저장하는 일.
         catch (Exception e){
             System.out.println(e);
             return null;
