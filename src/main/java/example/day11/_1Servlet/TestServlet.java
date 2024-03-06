@@ -21,13 +21,13 @@ import java.io.IOException;
 // 2. 서블릿 컨테이너에 요청받은 서블릿이 있는지 없는지 판단.
 //3-1. 없으면 init() 메소드 실행한 서블릿 생성,
 //3-2. 있으면, 생성했으면 스레드(작업스레드) 할당
-// 4.  service() 실행하고 Get, Post등 method 요청에 따른 메소드로 이동
+// 4. service() 실행하고 Get, Post등 method 요청에 따른 메소드로 이동
 // 5. doXXX 메소드 실행될 때, 요청(HttpServletRequest req)
 // - HTTP 관련된 정보를 요청할 수 있는 기능 가지고 있다.
 // 6. doXXX 메소드 종료될 때, 응답(HttpServletResponse resp)
 // - HTTP 관련된 정보를 응답할 수 있는 기능 가지고 있다.
 // ------------------- 다음 요청이 올 때까지.
-// 다시 요청이 들어오면 1 > 2 > 3-2 > 4 > 5
+// 다시 요청이 들어오면 1 > 2 > 3-2 > 4 > 5 > 6
 // ------------------- 서버가 종료되면 destroy() 실행되면서 안전하게 서블릿 제거
 
 @WebServlet("/servlet")
@@ -37,10 +37,10 @@ public class TestServlet extends HttpServlet {
         System.out.println("TestServlet.doGet");
         //요청 HttpServletRequest(요청객체)
 
-        String id  = req.getParameter("id"); //  QUERY PARAMETERS 에 id 입력
+        String id  = req.getParameter("id"); //  QUERY PARAMETERS 에 id 입력 http://192.168.17.85:8080/servlet?id=(넣을값) 이런방식
         System.out.println("id ="+ id); // 서버에게 보내는 메세지
 
-        int type = Integer.parseInt(req.getParameter("type"));
+        int type = Integer.parseInt(req.getParameter("type")); //  QUERY PARAMETERS 에 id 입력 http://192.168.17.85:8080/servlet?id=(String 넣을값)&type=(int 넣을값) 이런방식
         System.out.println("type = " + type);
 
         //응답 HttpServletResponse(응답객체)
