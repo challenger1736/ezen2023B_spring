@@ -33,23 +33,23 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
         return boardDao.doPostBoardWrite(boardDto);
     }
     // 2. 전체 글 출력 호출       /board.do   GET -- 호출 이니까    페이징처리, 검색 기능
-    public BoardPageDto doGetBoardViewList(int page){
+    public BoardPageDto doGetBoardViewList(int page, int pageBoardSize, int bcno, String keyString, String keywordString){
         System.out.println("BoardService.doGetBoardViewList");
         // 페이지처리시 사용할 SQL 구문 : limit 시작레코드 번호(0부터), 출력개수
         // 1. 페이지당 게시물을 출력할 개수(3개)
-        int pageBoardSize = 3;
+//        int pageBoardSize = 3;
 
         // 2. 페이지당 게시물을 출력할 시작 레코드 번호.
         int startRow = (page-1)*pageBoardSize;
         // 3. 총 페이지 수
             // 1. 전체 게시물 수
-        int totalBoardSize = boardDao.getBoardSize();
+        int totalBoardSize = boardDao.getBoardSize(bcno, keyString, keywordString);
             // 2. 총 페이지수 계산 (나머지 값 없으면 그대로, 나머지 있으면 +1)
         int totalPage = totalBoardSize % pageBoardSize == 0 ?
                 totalBoardSize/pageBoardSize : totalBoardSize/pageBoardSize+1;
 
         // 4. 게시물 정보 요청
-        List<BoardDto> list = boardDao.doGetBoardViewList(startRow, pageBoardSize);
+        List<BoardDto> list = boardDao.doGetBoardViewList(startRow, pageBoardSize, bcno, keyString, keywordString);
 
         // 5. 페이징 버튼 개수
             // 1. 페이지버튼 최대 개수
@@ -57,8 +57,8 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
             // 2. 페이지 버튼 시작번호 1페이지일때 1~3 1%3 = 1 > 1~3이 나와야함
                                 // 2페이지일때 1~3  2%3 = 2 > 1~3
                                 // 3페이지 일떄 1~3 3%3 = 0 > 1~3
-        int startBtn = (1+(page%btnSize==0? page/btnSize-1 : page/btnSize)*btnSize); // 1이면 1 2이면 1 3이면 1 4이면 4
-            // 간단하게 하면 int startBtn = ((page-1)/btnSize*btnSize)+1;
+//        int startBtn = (1+(page%btnSize==0? page/btnSize-1 : page/btnSize)*btnSize); // 1이면 1 2이면 1 3이면 1 4이면 4
+            int startBtn = ((page-1)/btnSize*btnSize)+1; // 간단하게 하면
             // 3. 페이지 버튼 끝번호
         int endBtn =(btnSize+(page%btnSize==0? page/btnSize-1 : page/btnSize)*btnSize);
             // 간단하게 하면 int endBtn = startbtn+btnsize-1;
@@ -66,7 +66,21 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
         if(endBtn>=totalPage){endBtn=totalPage;}
 
         // pageDto 구성 (page 값 넘기려고 추가로 작업하는 일)
-        BoardPageDto boardPageDto = new BoardPageDto(page, totalPage, startBtn, endBtn, list);
+//        BoardPageDto boardPageDto = new BoardPageDto(page, totalPage, startBtn, endBtn, list); // 빌더 패턴 쓴다고 이거 지움
+        // pageDto 구성 * 빌더패턴 : 생성자의 단점( 매개변수에 따른 유연성 부족)을 보완
+        // 사용방법 : 클래스명.builder().필드명(대입값).필드명(대입값).build(); = 빈 깡통(new)에 넣는 세터와 유사함
+        // + 생성자보단 유연성 : 매개변수의 순서와 개수 자유롭다
+            // 빌더패턴 vs 유연성 vs setter
+        BoardPageDto boardPageDto =
+                BoardPageDto.builder()
+                        .page(page)
+                        .totalPage(totalPage)
+                        .totalBoardSize(totalBoardSize)
+                        .list(list)
+                        .startBtn(startBtn)
+                        .endBtn(endBtn)
+                        .build();
+        // 빌더 패턴은 순서 안맞춰도 됨.
 
         return boardPageDto;
 
@@ -75,6 +89,9 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
 
     public BoardDto doGetBoardView( int bno){
         System.out.println("BoardService.doGetBoardView");
+
+        //조회수 처리
+        boardDao.boardViewIncrease(bno);
 
         return boardDao.doGetBoardView(bno);
     }

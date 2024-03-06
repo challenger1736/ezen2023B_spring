@@ -11,20 +11,20 @@ import org.springframework.web.multipart.MultipartFile;
 //@Builder // 이런게 있다. 생성자의 단점보완용 ( 유연성 )
 
 public class BoardDto {
-    long bno;           // 번호
-    String btitle;      // 제목
-    String bcontent;    // 내용
-    String bfile;       // 첨부파일
-    int bview;          // 조회수
-    String bdate;       // 작성일
-    long mno;           // 작성자 번호
-    long bcno;          // 카테고리
+    private long bno;           // 번호
+    private String btitle;      // 제목
+    private String bcontent;    // 내용
+    private String bfile;       // 첨부파일
+    private int bview;          // 조회수
+    private String bdate;       // 작성일
+    private long mno;           // 작성자 번호
+    private long bcno;          // 카테고리
 
-    MultipartFile uploadfile;
+    private MultipartFile uploadfile;
     
     // + 전체 출력시 필요한 필드
-    String id;
-    String img;
+    private String id;
+    private String img;
 }
 
 /*

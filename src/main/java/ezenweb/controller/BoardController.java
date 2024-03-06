@@ -44,14 +44,16 @@ public class BoardController {
     // 2. 전체 글 출력 호출       /board.do   GET -- 호출 이니까    페이징처리, 검색 기능
     @GetMapping("/do")
     @ResponseBody
-    public BoardPageDto doGetBoardViewList(int page){ // 매개변수 : 현재 페이지
+    public BoardPageDto doGetBoardViewList(@RequestParam int page,@RequestParam int pageBoardSize,
+                                           @RequestParam int bcno,@RequestParam("key") String keyString,
+                                           @RequestParam("keyword") String keywordString){ // 매개변수 : 현재 페이지
         System.out.println("BoardController.doGetBoardViewList");
-        return boardService.doGetBoardViewList(page);
+        return boardService.doGetBoardViewList(page, pageBoardSize, bcno, keyString, keywordString);
     }
     // 3. 개별 글 출력 호출        /board/view.do GET -- 호출이니까 // 게시물 번호 필요
     @GetMapping("/view.do")
     @ResponseBody
-    public BoardDto doGetBoardView(@RequestParam int bno){ // 쿼리스트링,
+    public BoardDto doGetBoardView(@RequestParam int bno){ // 쿼리스트링, JSON을 받을때는 @RequestBody
         System.out.println("BoardController.doGetBoardView");
         return boardService.doGetBoardView(bno);
     }

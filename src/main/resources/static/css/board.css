@@ -1,0 +1,23 @@
+
+.active > .page-link { /* 부트스트랩 css명 */
+    background-color : orange
+}
+
+a{
+    color: black;
+}
+
+.boardBtn{
+    background-color : orange;
+    color : white;
+    border : none;
+    width : 80px;
+    font-size : 15 px;
+    border-radius : 10px;
+}
+
+
+
+.categoryActive{
+    background-color : black;
+}

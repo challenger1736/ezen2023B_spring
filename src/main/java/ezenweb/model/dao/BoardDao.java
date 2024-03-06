@@ -41,9 +41,20 @@ public class BoardDao extends SuperDao {
         return 0;
     }
     // 2-2. 전체 게시물 수 호출
-    public int getBoardSize(){
+    public int getBoardSize(int bcno, String keyString, String keywordString){
         try{
-            String sql= "select count(*) from board;";
+            System.out.println("bcno = " + bcno + ", keyString = " + keyString + ", keywordString = " + keywordString);
+            String sql= "select count(*) from board b inner join member m on b.mno = m.no ";
+            // ======================= 1. 만약에 카테고리 조건이 있으면 where 추가
+            if(bcno>0){sql += " where b.bcno = "+bcno;}
+            // 2. 만약 검색 있을 때
+            if(!keywordString.isEmpty()){
+                System.out.println("★검색 키워드가 존재");
+                if(bcno>0){sql += " and ";} // 카테고리 있을때. and로 연결
+                else{sql += " where ";} // 카테고리 없을 때 where로 연결
+                sql += keyString+" like '%" + keywordString +"%'";
+            }
+
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if(rs.next()){return rs.getInt(1);};
@@ -55,12 +66,21 @@ public class BoardDao extends SuperDao {
     }
 
     // 2-1. 전체 글 출력 호출       /board.do   GET -- 호출 이니까    페이징처리, 검색 기능
-    public List<BoardDto> doGetBoardViewList(int startRow, int pageBoardSize){
+    public List<BoardDto> doGetBoardViewList(int startRow, int pageBoardSize, int bcno, String keyString, String keywordString){
         BoardDto boardDto = null;
         List<BoardDto> list = new ArrayList<>();
         System.out.println("BoardDao.doGetBoardViewList");
         try{
-            String sql = "select * from board b inner join member m on b.mno = m.no order by b.bdate desc limit ?,?";
+//            System.out.println("startRow = " + startRow + ", pageBoardSize = " + pageBoardSize + ", bcno = " + bcno + ", keyString = " + keyString + ", keywordString = " + keywordString);
+            String sql = "select * from board b inner join member m on b.mno = m.no ";
+            if(bcno>0){sql+="where b.bcno="+bcno;};
+            if(!keywordString.isEmpty()){
+                System.out.println("★검색 키워드가 존재");
+                if(bcno>0){sql += " and ";} // 카테고리 있을때. and로 연결
+                else{sql += " where ";} // 카테고리 없을 때 where로 연결
+                sql += keyString+" like '%" + keywordString +"%' ";
+            }
+            sql+=" order by b.bdate desc limit ?,?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1,startRow);
             ps.setInt(2,pageBoardSize);
@@ -80,8 +100,18 @@ public class BoardDao extends SuperDao {
         }
         return list;
     }
+    // 3-2. 개별 글 출력시 조회수 증가
+    public void boardViewIncrease(int bno){
+        try{
+            String sql = "update board set bview = bview+1 where bno = " +bno;
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
-    // 3. 개별 글 출력 호출        /board/view.do GET -- 호출이니까 // 게시물 번호 필요
+    // 3-1. 개별 글 출력 호출        /board/view.do GET -- 호출이니까 // 게시물 번호 필요
 
     public BoardDto doGetBoardView( int bno){
         System.out.println("BoardDao.doGetBoardView");
