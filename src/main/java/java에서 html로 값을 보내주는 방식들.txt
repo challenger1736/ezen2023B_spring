@@ -1,0 +1,84 @@
+
+1. Model을 이용한 전달:
+    Spring MVC에서는 컨트롤러에서 처리된 데이터를 Model 객체에 담아서 전달할 수도 있습니다.
+    이 방법은 간단하고 사용하기 편리합니다.
+
+    import org.springframework.web.servlet.ModelAndView;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.GetMapping;
+
+    @Controller
+    public class MyController {
+
+        @GetMapping("/getData")
+        public ModelAndView getData() {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("message", "Hello, World!");
+            modelAndView.setViewName("myPage"); // myPage는 HTML 템플릿의 이름입니다.
+            return modelAndView;
+        }
+    }
+
+---------------------------------------------------------------------------------------------------------------------
+
+2. ResponseBody를 이용한 전달: 값을 전달하기
+    Spring MVC에서는 @ResponseBody 어노테이션을 사용하여 컨트롤러에서 직접 데이터를 반환할 수 있습니다.
+    이 데이터는 JSON이나 XML 형식으로 전달될 수도 있고, HTML로 전달될 수도 있습니다.
+
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.ResponseBody;
+
+    @Controller
+    public class MyController {
+
+        @GetMapping("/getData")
+        @ResponseBody
+        public String getData() {
+            return "<h1>Hello, World!</h1>"; // HTML 형식의 데이터를 반환합니다.
+        }
+    }
+
+---------------------------------------------------------------------------------------------------------------------
+
+3. ModelAndView를 이용한 전달:
+    Spring MVC에서는 컨트롤러에서 처리된 데이터를 ModelAndView 객체에 담아서 전달할 수 있습니다.
+    이 객체에 데이터를 담아서 View 이름과 함께 반환하면, 해당 데이터는 View로 전달되어 HTML 페이지에서 사용할 수 있습니다.
+
+   // 정리 :
+    ModelAndView를 이용한 전달에서 View이름과 함께 반환하면 해당 setViewName한 뷰가 켜지고 거기서 addObject에 들어간 키 값을 사용할 수 있는 것.
+
+    import org.springframework.web.servlet.ModelAndView;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.GetMapping;
+
+    @Controller
+    public class MyController {
+
+        @GetMapping("/getData")
+        public ModelAndView getData() {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("message", "Hello, World!");
+            // 이런 식으로 변수에 지정해놔서 그 해당하는 템플릿(지금으론 myPage 템플릿)에서 변수로 쓸 수 있다. ( 뷰 템플릿마다 변수 받아오느 문법이 다를 것임. )
+
+            modelAndView.setViewName("myPage"); // myPage는 HTML 템플릿(뷰 템플릿)의 이름입니다.
+            return modelAndView;
+        }
+    }
+
+---------------------------------------------------------------------------------------------------------------------
+
+4. ViewResolver를 이용한 전달: // = 뷰 템플릿 전달한다.
+   Spring MVC에서는 ViewResolver를 사용하여 컨트롤러에서 반환한 뷰 이름과 실제 뷰 템플릿을 매핑할 수 있습니다.
+   이 방법은 컨트롤러에서 직접 데이터를 전달하는 대신에 뷰 이름만을 반환할 수 있도록 해줍니다.
+
+   import org.springframework.stereotype.Controller;
+   import org.springframework.web.bind.annotation.GetMapping;
+
+   @Controller
+   public class MyController {
+
+       @GetMapping("/getData")
+       public String getData() {
+           return "myPage"; // myPage는 HTML 템플릿의 이름입니다.
+       }
+   }
