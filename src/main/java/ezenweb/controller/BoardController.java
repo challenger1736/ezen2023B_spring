@@ -3,6 +3,7 @@ package ezenweb.controller;
 import ezenweb.model.dto.BoardDto;
 import ezenweb.model.dto.BoardPageDto;
 import ezenweb.service.BoardService;
+import ezenweb.service.FileService;
 import ezenweb.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private FileService fileService;
 
 
     // 1. 글쓰기 처리            /board/write.do POST            // Dto 필요
@@ -59,8 +63,36 @@ public class BoardController {
     }
 
     // 4. 글 수정 처리           /board/update.do   PUT          // Dto 필요
+    @PutMapping("/update.do")
+    @ResponseBody
+    public boolean doUpdateBoard(BoardDto boardDto){
+        System.out.println("BoardController.doUpdateBoard");
+        System.out.println("boardDto = " + boardDto);
+        return boardService.doUpdateBoard(boardDto);
+    }
 
     // 5. 글 삭제 처리           /board/delete.do    DELETE      // 게시물 번호 필요
+    @DeleteMapping("/delete.do")
+    @ResponseBody
+    public boolean doDeleteBoard(@RequestParam int bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
+        System.out.println("BoardController.doDeleteBoard");
+        return boardService.doDeleteBoard(bno);
+    }
+
+    // 6. 올린 첨부파일 다운로드 처리
+    // 함수의 3박자
+    // ( 뭘 받을건지: 지금은 파일 하나만 받기에 파일명을 바로 받아도된다,
+    // 뭘 리턴할건지,
+    // 언제 쓸건지:http 요청 )
+    @GetMapping("/file/download") // a태그이기 때문에 get매핑
+    @ResponseBody // 제이슨으로 하겠다.
+    public void getBoardFileDownload(String bfile){//왜 보이드인지?
+        System.out.println("BoardController.getBoardFileDownload");
+//        System.out.println("bfile = " + bfile);
+        fileService.getBoardFileDownload(bfile);
+        return;
+    }
+
 
     // =======================머스테치는 컨트롤에서 뷰 템플렛을 반환======================== //
 

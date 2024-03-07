@@ -25,9 +25,23 @@ function onView(){
             document.querySelector('.mno').innerHTML = r.mno;// div 이기 떄문에, 그 사이! innerHTML
             document.querySelector('.bdate').innerHTML = r.bdate;// div 이기 떄문에, 그 사이! innerHTML
             document.querySelector('.bview').innerHTML = r.bview;// div 이기 떄문에, 그 사이! innerHTML
-            document.querySelector('.bfile').innerHTML = r.bfile;// div 이기 떄문에, 그 사이! innerHTML
+            //* 다운로드 링크
+            document.querySelector('.bfile').innerHTML = `<a href="/board/file/download?bfile=${r.bfile}">${r.bfile}</a>`;// div 이기 떄문에, 그 사이! innerHTML
 
+            document.querySelector('.btnBox').innerHTML = `<button type="button" onclick="onDelete(${r.bno})">삭제</button>`;
 
+        }
+    })
+}
+
+function onDelete(bno){
+    $.ajax({
+        url: "/board/delete.do",
+        method: "delete",
+        data: {'bno' : bno},
+        success:(r)=>{
+            if(r){alert('삭제 성공'); location.href ="/board"}
+            else{ alert('삭제실패')}
         }
     })
 }

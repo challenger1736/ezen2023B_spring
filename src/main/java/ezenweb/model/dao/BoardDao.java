@@ -134,8 +134,42 @@ public class BoardDao extends SuperDao {
     }
 
     // 4. 글 수정 처리           /board/update.do   PUT          // Dto 필요
+    public boolean doUpdateBoard(BoardDto boardDto){
+        System.out.println("BoardDao.doUpdateBoard");
+        try{
+            String sql = "update board set btitle=?, bcontent =?, bcno=? where bno =? ";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, boardDto.getBtitle());
+            ps.setString(2, boardDto.getBcontent());
+            ps.setLong(3, boardDto.getBcno());
+            ps.setLong(4, boardDto.getBno());
+            int count = ps.executeUpdate();
+            if(count==1){
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
 
     // 5. 글 삭제 처리           /board/delete.do    DELETE      // 게시물 번호 필요
+    public boolean doDeleteBoard(int bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
+        System.out.println("BoardDao.doDeleteBoard");
+        try{
+            String sql = "delete from board where bno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, bno);
+            int count = ps.executeUpdate();
+            if(count==1){
+                return true;
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
 
     // =======================머스테치는 컨트롤에서 뷰 템플렛을 반환======================== //
 

@@ -5,6 +5,7 @@ import ezenweb.model.dto.BoardDto;
 import ezenweb.model.dto.BoardPageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -97,8 +98,31 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
     }
 
     // 4. 글 수정 처리           /board/update.do   PUT          // Dto 필요
+    public boolean doUpdateBoard(BoardDto boardDto){
+        System.out.println("BoardService.doUpdateBoard");
+        return boardDao.doUpdateBoard(boardDto);
+    }
+
 
     // 5. 글 삭제 처리           /board/delete.do    DELETE      // 게시물 번호 필요
+    public boolean doDeleteBoard(int bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
+        System.out.println("BoardService.doDeleteBoard");
+        // 레코드 삭제 전에 삭제할 첨부파일명을 임시로 꺼내둔다.
+        String bfile = boardDao.doGetBoardView(bno).getBfile();
+        // 1. 글 삭제 처리(DAO)
+        boolean result = boardDao.doDeleteBoard(bno);
+        // 2. DAO처리 성공시 첨부파일도 삭제
+        if(result){
+            // 기존에 첨부파일이 있었으면, 삭제
+            System.out.println("bfile = " + bfile);
+            if(bfile!=null){
+                return fileService.fileDelete(bfile);
+            }
+
+        }
+        return result;
+    }
+
 
     // =======================머스테치는 컨트롤에서 뷰 템플렛을 반환======================== //
 
