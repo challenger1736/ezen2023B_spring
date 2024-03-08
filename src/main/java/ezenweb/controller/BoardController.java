@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/board") // 공통 URL
@@ -68,15 +69,40 @@ public class BoardController {
     public boolean doUpdateBoard(BoardDto boardDto){
         System.out.println("BoardController.doUpdateBoard");
         System.out.println("boardDto = " + boardDto);
-        return boardService.doUpdateBoard(boardDto);
+        // 유효성 검사.
+            // 1. 현재 로그인된 아이디 (세션)
+        Object object = request.getSession().getAttribute("loginDto");
+        if(object != null){
+            String mid = (String)object;
+
+            // 2. 현재 수정할 게시물의 작성자 아이디 (DB)
+            boolean result = boardService.boardWriterAuth(boardDto.getBno(), mid); // 해당 세션 정보가 로그인한 사람이 작성한 글인지 체크
+            if(result){
+                return boardService.doUpdateBoard(boardDto); // 현재 수정할 게시물의 작성자 아이디
+            }
+
+        }
+        return false;
     }
 
     // 5. 글 삭제 처리           /board/delete.do    DELETE      // 게시물 번호 필요
     @DeleteMapping("/delete.do")
     @ResponseBody
-    public boolean doDeleteBoard(@RequestParam int bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
+    public boolean doDeleteBoard(@RequestParam long bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
         System.out.println("BoardController.doDeleteBoard");
-        return boardService.doDeleteBoard(bno);
+        // 유효성 검사.
+        // 1. 현재 로그인된 아이디 (세션)
+        Object object = request.getSession().getAttribute("loginDto");
+        if(object != null){
+            String mid = (String)object;
+
+            boolean result = boardService.boardWriterAuth(bno, mid);
+            // 2. 현재 수정할 게시물의 작성자 아이디 (DB)
+            if(result) {
+                return boardService.doDeleteBoard(bno);
+            }
+        }
+        return false;
     }
 
     // 6. 올린 첨부파일 다운로드 처리
@@ -91,6 +117,37 @@ public class BoardController {
 //        System.out.println("bfile = " + bfile);
         fileService.getBoardFileDownload(bfile);
         return;
+    }
+
+    // 7. 댓글 작성 ( brcontent, brindex, mno, bno )
+    // 받아오는 방법 [ {상위 댓글}, {상위 댓글}, {상위 댓글} ]
+    // [ {상위 댓글}, {상위 댓글}, {상위 댓글} ]
+    @PostMapping("/reply/write.do")
+    @ResponseBody
+    public boolean postReplyWrite(@RequestParam Map<String, String> map){
+        System.out.println("BoardController.postReplyWrite");
+        System.out.println("map = " + map);
+        // 1. 현재 로그인된 세셧 (톰캣서버, 자바프로그램 메모리 JVM) 호출
+        Object object = request.getSession().getAttribute("loginDto");
+        if(object == null){return false;} // 세션 없다(로그인 없다.)
+        // 2. 형변환
+        String mid = (String) object;
+        // 3. mid 를 mno 찾아오기
+        long mno = memberService.doGetLoginInfo(mid).getNo();
+        // 4. map에 mno 넣기
+        map.put("mno", mno+"");
+        System.out.println("map = " + map);
+
+        return boardService.postReplyWrite(map);
+    }
+
+    // 8. 댓글 출력 댓글 ( brno, brcontent , brindex , mno , bno , brindex )
+    @GetMapping("/reply/do")
+    @ResponseBody
+    public List<Map<String,String>> getReplyDo( int bno ){
+        System.out.println("BoardController.getReplyDo");
+        return boardService.getReplyDo(bno);
+
     }
 
 
@@ -115,4 +172,8 @@ public class BoardController {
     }
 
     // 4. 글 수정 페이지 이동       /board/update GET
+    @GetMapping("/update")
+    public String getBoardUpdate(){
+        return "ezenweb/board/update";
+    }
 }

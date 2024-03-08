@@ -1,20 +1,21 @@
 {{>ezenweb/header}}
 <div class="container">
-    <h3> 글쓰기 페이지 </h3>
-    <form class="boardWriteForm">
+    <h3> 글수정 페이지 </h3>
+    <form class="boardUpdateForm">
 <!--        enctype = "multipart/form-data" 로 하고
 아래 버튼은 type ="submit"으로 해도 전송된다.
 하지만 이렇게 통신하면 form 은 동기방식이라 새로 고침되므로 비동기 방식인 ajax 쓰려고 쓰는 것-->
-        카테고리 <select name="bcno">
+        카테고리 <select class="bcno" name="bcno">
                     <option value="1">자유</option>
                     <option value="2">노하우</option>
                 </select><br/>
-        제목     <input type="text" name="btitle" ><br/>
-        내용     <textarea name="bcontent" id="summernote"></textarea><br/>
+        제목     <input class="btitle" type="text" name="btitle" ><br/>
+        내용     <textarea class="bcontent" name="bcontent" id="summernote"></textarea><br/>
 <!--        id 를 summernote로 해줘야 썸머노트 쓸 수 있음! div 또는 textarea -->
-        첨부파일  <input type="file" name="uploadfile"><br/>
-        <button onclick="onWrite()" type="button">쓰기</button>
+        첨부파일  <div class="bfile"></div><br/>
+        수정할 첨부파일 <input type="file" name="uploadfile"/>
+        <button onclick="onUpdate()" type="button">쓰기</button>
     </form>
 </div>
-<script  src="/js/write.js"></script>
+<script src="/js/board/update.js"></script>
 {{>ezenweb/footer}}

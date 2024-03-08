@@ -11,6 +11,7 @@ import java.io.*;
 import java.net.URLEncoder;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.UUID;
 
 @Service // 이게 어차피 컴포넌트와 같다
@@ -100,6 +101,7 @@ public class FileService {
                 fin.read(bytes);
 
                 // 1-4. (확인용) 읽어온 파인의 바이트가 들어있다.
+                System.out.println("Arrays.toString(bytes) = "+ Arrays.toString(bytes));
                 System.out.println("bytes = " + bytes);
 //
             // 2. 불러온 바이트를 HTTP response를 이용한 바이트로 응답한다.
@@ -107,6 +109,11 @@ public class FileService {
             BufferedOutputStream fout = new BufferedOutputStream(response.getOutputStream());
                 // 2-2. 응답스트림.write(내보내기할바이트배열) 하나씩 바이트를 읽어와서 해당 바이트 배열에 저장해주는 함수.
                 fout.write(bytes);
+
+
+                // ------------- 버퍼 초기화(안전하게)
+                fin.close();    // 스트림 닫기
+                fout.close();   // 스트림 닫기
             }catch(Exception e){
                 System.out.println(e);
             }

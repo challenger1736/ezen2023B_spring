@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -100,12 +101,34 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
     // 4. 글 수정 처리           /board/update.do   PUT          // Dto 필요
     public boolean doUpdateBoard(BoardDto boardDto){
         System.out.println("BoardService.doUpdateBoard");
+
+    // 기존 첨부 파일 명 구하기
+        String bfile = boardDao.doGetBoardView((int)boardDto.getBno()).getBfile();
+
+        // 새로운 첨부 파일이 있다 없다.
+        if(!boardDto.getUploadfile().isEmpty()){//수정시 새로운 첨부파일이 있으면
+
+            // 새로운 첨부파일을 업로드하고 기존 첨부파일 삭제
+            String fileName = fileService.fileUpload(boardDto.getUploadfile());
+            if(fileName != null){ // 업로드 성공
+                boardDto.setBfile(fileName); // 새로운 첨부파일의 이름 dto 대입
+                // 기존 첨부파일 삭제
+                fileService.fileDelete(bfile);
+            }else{
+                return false; // 업로드 실패
+            }
+
+        }else{ // 새로운 첨부 파일 없으면
+            // 업로드 할 필요 없다.
+            // 기존 첨부파일명을 그대로 대입.
+            boardDto.setBfile(bfile);
+        }
         return boardDao.doUpdateBoard(boardDto);
     }
 
 
     // 5. 글 삭제 처리           /board/delete.do    DELETE      // 게시물 번호 필요
-    public boolean doDeleteBoard(int bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
+    public boolean doDeleteBoard(long bno){ // 얘는 쿼리스트링 입니다요잇 = @RequestParam
         System.out.println("BoardService.doDeleteBoard");
         // 레코드 삭제 전에 삭제할 첨부파일명을 임시로 꺼내둔다.
         String bfile = boardDao.doGetBoardView(bno).getBfile();
@@ -122,8 +145,22 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
         }
         return result;
     }
+    // 6. 게시물 작성자 인증
+    public boolean boardWriterAuth(long bno, String mid){
+        return boardDao.boardWriterAuth(bno,mid);
+    }
 
+    // 7. 댓글 등록
+    public boolean postReplyWrite( Map<String, String> map){
+        System.out.println("BoardController.postReplyWrite");
+        return boardDao.postReplyWrite(map);
+    }
 
+    // 8. 댓글 출력
+    public List<Map<String,String>> getReplyDo( int bno ){
+        System.out.println("BoardController.getReplyDo");
+        return boardDao.getReplyDo(bno);
+    }
     // =======================머스테치는 컨트롤에서 뷰 템플렛을 반환======================== //
 
     // 1. 글쓰기 페이지 이동        /board/write GET -- 메소드가 달라야 같은 URL로 실행 가능함.

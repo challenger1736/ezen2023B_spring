@@ -1,0 +1,28 @@
+#contentBox{
+    background-color : #EBC394;
+    border: 1px solid #0d0d0d;
+    border-radius : 15px;
+    padding : 50px;
+    margin-top : 20px;
+}
+#contentBox .viewTitle{
+    margin-right:10px
+}
+
+#contentBox > div{/* 제목 */
+    padding : 20px 0px;
+    border-bottom : 1px solid #e8e8e8;
+}
+
+#contentBox > div:nth-child(1) > span {font-size : 25px;}
+
+#contentBox > div:nth-child(2){
+    display:flex; justify-content: space-between;
+}
+
+#contentBox > div:nth-child(3){height: 500px;
+    min-height : 500px/* 최소높이 : 내용물 더 커지면 더 커진다. */
+    /* max-height : 최대높이 */
+}
+
+#contentBox > div:nth-child(4) > span {font-size : 25px;}
