@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -207,9 +208,9 @@ public class BoardDao extends SuperDao {
         return false;
     }
     // 댓글 출력
-    public List<Map<String,String>> getReplyDo( int bno ){
+    public List<Map<String,Object>> getReplyDo( int bno ){
         System.out.println("BoardController.getReplyDo");
-        List<Map<String,String>> list = new ArrayList<>();
+        List<Map<String,Object>> list = new ArrayList<>();
         try{
             // 상위 댓글 먼저 출력
             String sql = "select * from breply where brindex = 0 and bno ="+bno;
@@ -217,11 +218,31 @@ public class BoardDao extends SuperDao {
             rs = ps.executeQuery();
             while ( rs.next()){
                 // map vs dto
-                Map<String,String> map = new HashMap<>();
+                // 상위 댓글 하나씩 객체화 하는 곳 //
+                Map<String,Object> map = new HashMap<>();
                 map.put("brno", rs.getString("brno"));
                 map.put("brcontent", rs.getString("brcontent"));
                 map.put("brdate", rs.getString("brdate"));
                 map.put("mno", rs.getString("mno"));
+                // 해당 상위 댓글의 하위 댓글들도 호출하기 //
+                String subSql2 = "select * from breply where brindex = ? and bno = "+bno;
+                ps = conn.prepareStatement(subSql2);
+                ps.setInt(1, Integer.parseInt(rs.getString("brno")));
+                    // (int) vs Integer.parseInt() // (int) 는 부모자식 관계여야한다.
+                    // rs 사용하면 안되는 이유 : 현재 상위 댓글 출력시 rs 사용중(while(rs.next()) 이므로
+                ResultSet rs2 = ps.executeQuery(); // rs 는 이미 이전 ps로 가져온 값이므로 ps2는 선언해줄 필요가 없다.
+                List<Map<String,Object>> sublist = new ArrayList<>();
+                while(rs2.next()) {
+                    Map<String, Object> subMap = new HashMap<>(); // 대 댓글들
+                    subMap.put("brno", rs2.getString("brno"));
+                    subMap.put("brcontent", rs2.getString("brcontent"));
+                    subMap.put("brdate", rs2.getString("brdate"));
+                    subMap.put("mno", rs2.getString("mno"));
+                    sublist.add(subMap);
+                }
+                // 해당 상위 댓글의 하위 댓글들도 호출하기 END
+                map.put("subReply", sublist);
+
                 list.add(map);
 
                 //
@@ -230,7 +251,7 @@ public class BoardDao extends SuperDao {
         }catch (Exception e){
             System.out.println(e);
         }
-        return null;
+        return list;
     }
 
     // =======================머스테치는 컨트롤에서 뷰 템플렛을 반환======================== //

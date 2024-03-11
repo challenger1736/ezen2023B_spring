@@ -157,7 +157,7 @@ public class BoardService { // Controller 에서 매핑이랑 어노테이션 �
     }
 
     // 8. 댓글 출력
-    public List<Map<String,String>> getReplyDo( int bno ){
+    public List<Map<String,Object>> getReplyDo( int bno ){
         System.out.println("BoardController.getReplyDo");
         return boardDao.getReplyDo(bno);
     }

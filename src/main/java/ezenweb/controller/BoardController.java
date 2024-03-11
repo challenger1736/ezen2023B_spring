@@ -144,7 +144,7 @@ public class BoardController {
     // 8. 댓글 출력 댓글 ( brno, brcontent , brindex , mno , bno , brindex )
     @GetMapping("/reply/do")
     @ResponseBody
-    public List<Map<String,String>> getReplyDo( int bno ){
+    public List<Map<String,Object>> getReplyDo( int bno ){
         System.out.println("BoardController.getReplyDo");
         return boardService.getReplyDo(bno);
 
