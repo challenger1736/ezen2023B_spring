@@ -795,3 +795,15 @@
 2024-03-11T15:21:48.021+09:00  INFO 1604 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-03-11T15:21:48.022+09:00  INFO 1604 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-03-11T15:21:48.022+09:00  INFO 1604 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-03-13T10:50:57.423+09:00  INFO 14496 --- [main] ezenweb.AppStart                         : Starting AppStart using Java 17.0.9 with PID 14496 (C:\Users\504\Desktop\ezen2023B_spring\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2023B_spring)
+2024-03-13T10:50:57.432+09:00  INFO 14496 --- [main] ezenweb.AppStart                         : No active profile set, falling back to 1 default profile: "default"
+2024-03-13T10:50:59.131+09:00  INFO 14496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-03-13T10:50:59.140+09:00  INFO 14496 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-13T10:50:59.141+09:00  INFO 14496 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-03-13T10:50:59.192+09:00  INFO 14496 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-13T10:50:59.192+09:00  INFO 14496 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1550 ms
+2024-03-13T10:50:59.933+09:00  INFO 14496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-03-13T10:50:59.939+09:00  INFO 14496 --- [main] ezenweb.AppStart                         : Started AppStart in 3.173 seconds (process running for 3.576)
+2024-03-13T10:51:11.784+09:00  INFO 14496 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-13T10:51:11.784+09:00  INFO 14496 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-13T10:51:11.785+09:00  INFO 14496 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
