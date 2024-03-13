@@ -127,7 +127,7 @@ public class BoardController {
     public boolean postReplyWrite(@RequestParam Map<String, String> map){
         System.out.println("BoardController.postReplyWrite");
         System.out.println("map = " + map);
-        // 1. 현재 로그인된 세셧 (톰캣서버, 자바프로그램 메모리 JVM) 호출
+        // 1. 현재 로그인된 세션 (톰캣서버, 자바프로그램 메모리 JVM) 호출
         Object object = request.getSession().getAttribute("loginDto");
         if(object == null){return false;} // 세션 없다(로그인 없다.)
         // 2. 형변환

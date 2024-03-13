@@ -15,7 +15,7 @@ function onView(){
     $.ajax({
         url : "/board/view.do", // 쿼리스트링 방식
         method : "get",
-        data : {"bno": bno }, // 이것도 쿼리스트링 방식으로 침.
+        data : {"bno": bno }, // 이것도 쿼리스트링 방식으로.
         success : (r) => {
             console.log(r);
 

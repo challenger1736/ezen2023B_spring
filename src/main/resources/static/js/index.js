@@ -8,10 +8,10 @@ $.ajax({
     success : (r)=>{
         console.log(r); // 일단 확인 먼저
         //1.어디에
-        let login_menu = document.querySelector('#login_menu');
+        let login_menu = document.querySelector('#login_menu'); // 여기에 로그인하면 뭘 넣을거다. ( 사용자 정보를 넣을거다 )
         //2. 무엇을
         let html = ``;
-        if(r!=''){ // 로그인 했을 때
+        if(r!=''){ // 로그인 했을 때 , 세션에 있을 때
 
             $.ajax({url:"/member/login/info",
             method:'get',

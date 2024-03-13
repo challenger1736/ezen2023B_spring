@@ -117,7 +117,7 @@ public class MemberController {
         boolean result = MemberDao.getInstance().doPostLogin(loginDto); // Dao 처리
         if(result){ // 로그인 성공이면,
             // 세션에 저장할 내용물들을 구성( 식별키 만 넣어도된다. )
-            request.getSession().setAttribute("loginDto",loginDto.getId()); // loginDto id 넣기
+            request.getSession().setAttribute("loginDto",loginDto.getId()); // 세션에 loginDto라는 키에 해당 id 넣기
 
         }
         
