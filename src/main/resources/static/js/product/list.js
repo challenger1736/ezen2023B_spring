@@ -66,6 +66,16 @@ function kakaoMapView( latitude , longitude ){
                   document.querySelector('.offcanvas-body .carousel-inner').innerHTML = carouselHTML
                     // 3. 제품 가격/내용들
                     // 4. 버튼( 찜하기 , 채팅하기 )
+                    // 현재 로그인 했고 찜하기 상태 여부 따라 css 변화
+
+
+
+//                  document.querySelector('.offcanvas-body .sideBarBtnBox').innerHTML =
+//                                     `
+//                                     <button type="button" onclick="plikeWrite(${data.pno}, 'post')">찜하기 등록</button>
+//                                     <button type="button" onclick="plikeWrite(${data.pno}, 'delete')">찜하기 취소</button>
+//                                     <button type="button" onclick="plikeWrite(${data.pno}, 'get')">채팅하기</button>
+//                                     `
             });
 
             return marker; // 2. 클러스터 저장하기 위해 반복문 밖으로 생성된 마커 반환.
@@ -75,6 +85,69 @@ function kakaoMapView( latitude , longitude ){
         clusterer.addMarkers(markerList);
     });
 }
+
+// 2. 주소도 동일하고 매개변수도 동일할 때
+// plikeWrite(1, 'get') 이런식.
+function plikeWrite(pno, method){
+console.log(pno);
+console.log(method);
+    let result = false;
+    $.ajax({
+        url : "/product/plike.do",
+        method : method,
+        async : false,
+        data : {'pno': pno},
+        success : (r) =>{ console.log(r);
+            if(!r){alert('로그인 후 이용 가능합니다.')};
+            result = r;
+
+        }
+    })
+    if(method != 'get') plikeView(pno); // 찜하기 변화 후
+    return result;
+}
+
+// 3. 찜하기 상태 출력함수 // 1. 사이드바 열릴 때 // 2. 찜하기 변화가 있을 때.
+function plikeView(pno){
+let result = plikeWrite(pno,'get');
+                    if(result){// 로그인 했고 이미 찜하기 상태
+                    document.querySelector('.offcanvas-body .sideBarBtnBox').innerHTML = `
+                                          <button type="button" onclick="plikeWrite(${pno}, 'delete')">찜하기 취소</button>
+                                          <button type="button" onclick="plikeWrite(${pno}, 'get')">채팅하기</button>
+                                          `
+
+                    }
+                    else{//로그인 안했거나 찜하기 안한 상태
+                        document.querySelector('.offcanvas-body .sideBarBtnBox').innerHTML =`
+                                         <button type="button" onclick="plikeWrite(${pno}, 'post')">찜하기 등록</button>
+                                         <button type="button" onclick="plikeWrite(${pno}, 'get')">채팅하기</button>
+                                         `
+
+                    }
+}
+
+//// 3.
+//function plikeView(pno){
+//  $.ajax({
+//        url : "/product/plike/view.do",
+//        method "get",
+//        data : {'pno': pno},
+//        success : (r) =>{ console.log(r);
+//
+//        }
+//    })
+//}
+//// 4.
+//function plikeDelete(pno){
+//  $.ajax({
+//        url : "/product/plike/delete.do",
+//        method "get",
+//        data : {'pno': pno},
+//        success : (r) =>{ console.log(r);
+//
+//        }
+//    })
+//}
 /*
     AJAX
         $.ajax({  url : "" , method : "" ,  success : (r)=> {}   })

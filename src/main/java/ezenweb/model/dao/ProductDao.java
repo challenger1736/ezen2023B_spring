@@ -78,4 +78,53 @@ public class ProductDao extends SuperDao {
         }catch (Exception e ){}
         return list;
     }
+
+    public boolean getPlikeWrite( int pno ,int mno ){
+        System.out.println("pno = " + pno + ", mno = " + mno);
+        try{
+            String sql = "insert into plike values (?, ?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,mno); ps.setInt(2,pno);
+            int count = ps.executeUpdate();
+            if(count==1)return true;
+
+        }
+        catch (Exception e){
+
+        }
+        return false;
+    }
+
+    // 4. 해당 제품의 찜하기 상태 출력 // 언제 실행 : 로그인했고 찜하기버튼 출력 시 , 매개변수 :pno, 리턴 : boolean(등록 있다/없다) //
+
+    public boolean getPlikeView( int pno,int mno ){
+        try{
+            String sql = "select * from plike where mno =? and pno =?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,mno);
+            ps.setInt(2,pno);
+            rs = ps.executeQuery(); if(rs.next()) return true;
+        }
+        catch (Exception e){
+
+        }
+        return false;
+    }
+
+    // 5. 해당 제품의 찜하기 취소/삭제  // 언제 실행 : 로그인했고 찜하기버튼 클릭 시 , 매개변수 :pno, 리턴 : boolean //
+
+    public boolean getPlikeDelete( int pno,int mno ){
+        try{
+            String sql = "delete from plike where mno =? and pno =?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,mno);
+            ps.setInt(2,pno);
+            int count = ps.executeUpdate();
+            if(count==1)return true;
+        }
+        catch (Exception e){
+
+        }
+        return false;
+    }
 }
