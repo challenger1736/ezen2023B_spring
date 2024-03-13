@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 function onWrite(){
     console.log("onWrite()");
-    // 1. 폼 DOM 가져온다.
+    // 1. 폼 DOM 가져온다. // name 값의 value들을 가져온다.
     let boardWriteForm = document.querySelector('.boardWriteForm');
     // 2. 폼 바이트(바이너리) 객체 변환 [ 첨부 파일 보낼때는 필수 ]
     let boardWriteFormData = new FormData(boardWriteForm);
@@ -45,7 +45,7 @@ function onWrite(){
             }else if(r == -2){
             alert('글쓰기 실패: 로그인 세션이 존재하지 않습니다.(잘못된 접근)');
             location.href = "/member/login";
-            }else if(r>= 1){
+            }else if(r>= 1){ // 글 번호를 준다 왜? 쿼리스트링으로 쓰려고.
             alert('글쓰기 성공')
             location.href = `/board/view?bno=${r}`;
             }

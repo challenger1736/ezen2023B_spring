@@ -82,7 +82,7 @@ function doViewList(page){
 // 2. 페이지당 게시물 수
 function onPageBoardSize(object){
     console.log(object);
-    console.log(object.value); // 이렇게 선택한 옵션의 밸류 받아올 수 있음.
+    console.log(object.value); // 이렇게 선택한 옵션의 밸류 받아올 수 있음. option들의 value로
 
     pageObject.pageBoardSize = object.value;
     doViewList(1);

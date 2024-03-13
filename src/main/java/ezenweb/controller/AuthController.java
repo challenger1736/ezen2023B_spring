@@ -36,12 +36,18 @@ public class AuthController {
         }
         System.out.println("ecode = " + ecode);
         // 2. 인증코드를 http 세션에 특정시간만큼 인증코드 보관
+
+        // 일반적으로는 이메일 인증 코드는 보안에 민감한 정보이므로 데이터베이스에 저장하고,
+        // 인증이 완료되면 삭제하는 방식을 선호합니다. 이는 보안을 강화하고,
+        // 사용자가 인증 프로세스를 완료하면 관련 정보를 정리하여 데이터베이스의 부하를
+        // 줄일 수 있기 때문입니다.
+
             // 2-1. 세션에 속성 추가해서 발급된 인증코드 대입하기
         request.getSession().setAttribute("ecode", ecode);
             // 2-2. 세선에 생명주기 추가하기 .setMaxInactiveInterval
         request.getSession().setMaxInactiveInterval(180); // 초 기준 // test 라서 10초 동안 세션유지하고 10초후 삭제
         // 3. 발급된 인증코드를 인증할 이메일로 전송
-        emailService.send(email,"EZEN웹 WEB 인증코드", "인증코드 : ["+ecode+"]입니다");
+        emailService.send(email,"EZEN웹 WEB 인증코드", "인증코드 : ["+ecode+"]입니다"); // 오토와이얼드된 이메일 서비스 함수 이용해서 보내기
         return true;
     }
 
@@ -61,7 +67,7 @@ public class AuthController {
             }
         }
 
-//        String ecode = (String) request.getSession().getAttribute("edode");
+//        String ecode = (String) request.getSession().getAttribute("ecode");
 
 //        instanceof 내가 만든게 아니면 String인지 모르니까 instanceof 로 확인하기
         // 2. 입력받은 인증코드와 생성된 인증코드와 일치여부

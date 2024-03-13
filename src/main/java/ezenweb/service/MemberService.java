@@ -22,7 +22,7 @@ public class MemberService {
             // 만약에 첨부파일이 존재하면
         String fileName = "defaultImg.jpg";
         System.out.println("memberDto = " + memberDto);
-        System.out.println("memberDto.getImg() = " + memberDto.getImg()); //비어있는 객체가 무조건 있다
+        System.out.println("memberDto.getImg() = " + memberDto.getImg()); //비어있는 객체가 무조건 있다 / 프로필 사진 등록안하면
         System.out.println("memberDto.getImg().isEmpty() = " + memberDto.getImg().isEmpty());
         if(!memberDto.getImg().isEmpty()) {
             fileName = fileService.fileUpload(memberDto.getImg());
@@ -35,7 +35,7 @@ public class MemberService {
                 return false;
             }
         }
-        memberDto.setUuidFile(fileName);
+        memberDto.setUuidFile(fileName); // img자체가 아닌 경로를 저장.
         boolean result = memberDao.doPostSignup(memberDto);
         // * 이메일 테스트
 //        if(result){ emailService.send(); }

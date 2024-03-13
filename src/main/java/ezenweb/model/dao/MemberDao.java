@@ -25,7 +25,7 @@ public class MemberDao extends SuperDao{
         ps.setString(4,memberDto.getEmail());
         ps.setString(5,memberDto.getPhone());
 //        ps.setString(6,memberDto.getImg()); // String 아니고 Multipart로 바꿔서 이렇게안됨
-        ps.setString(6,memberDto.getUuidFile()); // String 아니고 Multipart로 바꿔서 이렇게안됨
+        ps.setString(6,memberDto.getUuidFile()); // String 으로 바꿨음, Multipartfile의 바이트를 저장할 수는 있겠는데 용량이 큼
 
 
         int count = ps.executeUpdate();
@@ -86,7 +86,7 @@ public class MemberDao extends SuperDao{
             ps = conn.prepareStatement(sql);
             ps.setString(1,id);
             rs= ps.executeQuery();
-            if(rs.next()){return true;};
+            if(rs.next()){return true;}; // true면 아이디 있음.
         }catch (Exception e){
             System.out.println(e);
         }

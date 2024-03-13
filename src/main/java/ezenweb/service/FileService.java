@@ -38,7 +38,7 @@ public class FileService {
         // 식별키와 실제 이름 구분 : 왜? 나중에 쪼개서 구분하려고 [ 다운로드시 식별키 빼고 제공하려고 ]
         // 혹시나 파일 이름이 구분문자 가 있을 경우 기준이 깨짐.
         // .replaceAll() : 문자열 치환/교체
-        String filename = uuid+"_"+multipartFile.getOriginalFilename().replaceAll("_","-"); //이걸 다 바꾸게.
+        String filename = uuid+"_"+multipartFile.getOriginalFilename().replaceAll("_","-"); //_ 이걸 다 바꾸게. -로
 //        memberDto.setUuidFile(filename); // 어차피 파일은 대개 고정이므로 filename만 있으면 됨,
 // 얘는 할 수가 없음!! multipartFile로 바꿀수 없음
 

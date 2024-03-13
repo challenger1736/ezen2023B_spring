@@ -13,7 +13,7 @@ console.log('member.js')
             정규표현식.test(검사할 대상)
         - 형식 규칙
          /^ : 시작, $/ : 끝
-         {최소길이,최대길이 } : 문자 길이 규칙
+         { 최소길이, 최대길이 } : 문자 길이 규칙
          [허용할 문자]  : 허용 문자 규칙
             [a-z]       : 소문자 a~z 허용
             [A-Z]       : 대문자 A~Z 허용
@@ -22,16 +22,16 @@ console.log('member.js')
             [a-zA-Z0-9] : 대소문자 a~z 허용, 숫자허용
             [a-zA-Z0-9가-힣] : 대소문자 a~z 허용, 숫자허용, 한글허용
             [ac]            : a또는 c 허용
-            +               : 앞에 있는 패턴 1개이상 반복// = 뜻 : 앞의 문구는 한 개이상 넣어라.
-            ?               : 앞에 있는 패턴 0개 혹은 1개 이상 반복
-            *               : 앞에 있는 패턴 0개 반복   
-            (?=.*[1개이상 문자 패턴])[]{}
+            (?=.*[1개이상 문자 패턴])[]{개수}
+            +               : 얘 앞에 있는 패턴 1개이상 반복// = 뜻 : 앞의 문구는 한 개이상 넣어라.
+            ?               : 얘 앞에 있는 패턴 0개 혹은 1개 이상 반복
+            *               : 얘 앞에 있는 패턴 0개 반복
             .               : 1개의 문자를 뜻함 // 이래서 이런애들을 쓰려면 \ 백슬래시를 써야한다.
             예) 1개 이상 필수
                 (?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{5,30}
 
             예) 000-0000-0000 또는 00-000-0000
-            let 폰규칙 = /^ ([0-9]{2,3})+[-]+([0,9]{3,4})+[-]+[0-9]{4}$/ [-]?
+            let 폰규칙 = /^ ([0-9]{2,3})+[-]+([0,9]{3,4})+[-]+[0-9]{4}$/ [-]?면 들어가도되고 안들어가도되고
 
             예) 문자열@문자.문자
             qwe@naver.com
@@ -43,7 +43,11 @@ console.log('member.js')
 */
 // ******* 현재 유효성 검사 체크 현황
 
+// 1. 인증 구역
+let authbox = document.querySelector('.authbox');
 
+let authreqbtn = document.querySelector('.authreqbtn'); // 인증요청 버튼 이렇게 전역으로 변수를 저장
+// 해놨기에 저 클래스 버튼이 authreqbtn.disabled = true ; or false; 이렇게 해도 먹힘.
 
 let checkArray = [false,false,false,false,false]; // 아이디, 비밀번호, 이름 , 전화번호 , 이메일
 //8. 이메일 유효성 검사, 문자열@문자.문자
@@ -51,7 +55,7 @@ function emailcheck(){
     let email = document.querySelector('#email').value;
     let 이메일규칙 =  /^[a-zA-Z0-9]+@+[a-zA-Z0-9_-]+\.[a-zA-Z]+$/
     let msg = '아이디@도메인 입력해주세요.'
-    checkArray[4] = false;
+    checkArray[4] = false; // 이메일 인증까지 해야 true로 바뀌게
     authreqbtn.disabled = true;
     if(이메일규칙.test(email)){
         authreqbtn.disabled = false; // 유효성 검사 맞으면 disable 안되게
@@ -103,7 +107,7 @@ function pwcheck(){
     // 2. 유효성 검사
     let msg = "통과";
         // 1. 비밀번호 에 대한 정규 표현식
-    let 비밀번호규칙 = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{5,30}$/ // 영대소문자 1개 필수와 숫자 1개 필수의 조합 5~30글자
+    let 비밀번호규칙 = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{5,30}$/ // 영대소문자 1개 필수와 숫자 1개 필수의 조합 <필수포함해서 5~30글자
         // 2.
         if(비밀번호규칙.test(pw)){ //비밀번호 검사
             msg = "표현식 일치" // 있으나 마나
@@ -127,10 +131,7 @@ function pwcheck(){
 
 }
 let timer = 180; // 인증 시간
-// 1. 인증 구역
-let authbox = document.querySelector('.authbox');
 
-let authreqbtn = document.querySelector('.authreqbtn'); // 인증요청 버튼
 // 9. 인증요청
 function authreq( object ){
 
@@ -144,7 +145,7 @@ function authreq( object ){
 
     // ======== 자바에게 인증 요청 ===============
     $.ajax({
-        url : "/auth/email/req",
+        url : "/auth/email/req", // 쿼리스트링으로 가겠구만
         method : "get",
         data : {"email": document.querySelector('#email').value},
         success : (r) => {
@@ -173,6 +174,11 @@ function ontimer(){
     // 종료 : clearInterval(종료할Interval변수) : 종료할 Interval의 변수 대입.
 //let time = 0;
     timerInter = setInterval(()=>{
+    // setInterval() 함수는 JavaScript에서 주어진 시간 간격마다
+    // 함수를 반복적으로 실행하는 역할을 합니다.
+    // 예시 >  setInterval(function() { console.log('반복 실행되는 함수');}, 1000)
+    // 멈추기 = clearInterval(setInterval변수명)
+
     // 1. 현재 날짜/시간
     //    let today = new Date();
     // 2. 타이머 리미트
@@ -250,7 +256,7 @@ function idcheck(){
     console.log(아이디규칙.test(id));
 
     // 간단한 유효성 검사 결과 출력
-    if(아이디규칙.test(id)){
+    if(아이디규칙.test(id)){ // 정규표현식에 맞으면 실행되는 아작스
         // 아이디 중복 체크 (DB 찍기,ajax)
         $.ajax({ // 비동기 vs 동기
             // type: "",
@@ -279,6 +285,26 @@ function idcheck(){
    
 }
 
+function onpreimg(e){
+    console.log('preimg');
+    console.log(e); // 해당 함수를 실행한 input
+    console.log(e.files); //  현재 인풋의 파일들.
+    console.log(e.files[0]); //  현재 인풋의 파일들.중에 첫번째,
+    // - input에 업로드 된 파일을 바이트로 가져오기
+    // 1. 파일 읽기 객체 생성
+    let fileReader = new FileReader();
+    // 2. 파일 읽기 메소드
+    fileReader.readAsDataURL(e.files[0]);
+    console.log(fileReader);
+    console.log(fileReader.result); // 확인해보면 null 이러면 안나옴 onload로 불러와야함.
+    // 3. 파일Reader에 on load 정의
+    fileReader.onload = event =>{ // => 이렇게 쓰는거 자체가 함수의 선언
+        console.log(event);     // ProgressEvent
+        console.log(event.target);
+        console.log(event.target.result); // 여기에 읽어온 첨부파일의 바이트가 있음.
+        document.querySelector('#preimg').src = event.target.result; // 이렇게 src를 바꿔줘서 미리보기를 해줄수도 있구나
+    }
+}
 
 // 1. 회원가입
 function signup(){
@@ -314,6 +340,7 @@ function signup(){
         console.log( signUpForm ); //
     let signUpFormData = new FormData( signUpForm );
         console.log( signUpFormData );  // new FormData : 문자데이터가 아닌 바이트 데이터로 변환. ( 첨부파일 필수 )
+        // form 으로는 이렇게 보내나봄.
 
     // 3. 원래 배열에 저장--> Spring Controller 서버와 통신[ JQUERY AJAX ]
 //    $.ajax({
@@ -380,7 +407,7 @@ function login(){
     $.ajax({
                 url : '/member/login',
                 method : 'POST',
-                data : info,
+                data : info, // 이렇게 객체화로 보내도 Dto로 들어감. 컨트롤러에서 받는 매개변수 (LoginDto loginDto) 임
                 success : function ( result ){ //함수명은 생략가능.
                     console.log(result);
                     // 4. 결과
@@ -397,26 +424,7 @@ function login(){
 
 }
 
-function onpreimg(e){
-    console.log('preimg');
-    console.log(e); // 해당 함수를 실행한 input
-    console.log(e.files); //  현재 인풋의 파일들.
-    console.log(e.files[0]); //  현재 인풋의 파일들.중에 첫번째,
-    // - input에 업로드 된 파일을 바이트로 가져오기
-    // 1. 파일 읽기 객체 생성
-    let fileReader = new FileReader();
-    // 2. 파일 읽기 메소드
-    fileReader.readAsDataURL(e.files[0]);
-    console.log(fileReader);
-    console.log(fileReader.result); // 확인해보면 null 이러면 안나옴 onload로 불러와야함.
-    // 3. 파일Reader에 on load 정의
-    fileReader.onload = event =>{
-        console.log(event);     // ProgressEvent
-        console.log(event.target);
-        console.log(event.target.result); // 여기에 읽어온 첨부파일의 바이트가 있음.
-        document.querySelector('#preimg').src = event.target.result;
-    }
-}
+
 /*
     함수 정의 방법
         1. function 함수명(매개변수){}
