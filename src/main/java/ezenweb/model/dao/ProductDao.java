@@ -55,6 +55,10 @@ public class ProductDao extends SuperDao {
                         .pstate( rs.getByte("pstate"))
                         .plat( rs.getString("plat"))
                         .plng( rs.getString("plng"))
+                        .plng( rs.getString("pimg"))
+                        .plng( rs.getString("plng"))
+                        .plng( rs.getString("plng"))
+                        .plng( rs.getString("plng"))
                         .build() );
             }
         }catch (Exception e ){}
