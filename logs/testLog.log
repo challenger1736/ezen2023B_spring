@@ -815,10 +815,10 @@
 2024-03-13T10:53:21.211+09:00  INFO 13624 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2024-03-13T10:53:21.211+09:00  INFO 13624 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 878 ms
 2024-03-13T10:53:22.068+09:00  WARN 13624 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2024-03-13T10:53:22.078+09:00  INFO 13624 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+2024-03-13T10:53:22.078+09:00  INFO 13624 --- [main] .s.b.a.l.ConditionEvaluationReportLogger :
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2024-03-13T10:53:22.096+09:00 ERROR 13624 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+2024-03-13T10:53:22.096+09:00 ERROR 13624 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   :
 
 ***************************
 APPLICATION FAILED TO START
@@ -840,10 +840,10 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2024-03-13T10:55:10.810+09:00  INFO 14856 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2024-03-13T10:55:10.810+09:00  INFO 14856 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 774 ms
 2024-03-13T10:55:11.744+09:00  WARN 14856 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2024-03-13T10:55:11.762+09:00  INFO 14856 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+2024-03-13T10:55:11.762+09:00  INFO 14856 --- [main] .s.b.a.l.ConditionEvaluationReportLogger :
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2024-03-13T10:55:11.784+09:00 ERROR 14856 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+2024-03-13T10:55:11.784+09:00 ERROR 14856 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   :
 
 ***************************
 APPLICATION FAILED TO START

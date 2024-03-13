@@ -38,7 +38,7 @@
     var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-        minLevel: 6 // 클러스터 할 최소 지도 레벨
+        minLevel: 8 // 클러스터 할 최소 지도 레벨
     });
     // 3. 마커 생성후 클러스터 넣을 마커들의 데이터
     // 데이터를 가져오기 위해 jQuery를 사용합니다   // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
@@ -52,6 +52,7 @@
             // - 클러스터에 넣기 전에 마커 커스텀
             // 1. 마커에 클릭이벤트를 등록합니다
             kakao.maps.event.addListener(marker, 'click', function() {
+<<<<<<< HEAD
             // 2. 만약 마커 클릭시 사이드바 열기
                 document.querySelector('.sideBarBtn').click();
                 //3. 사이드바 내용물
@@ -73,6 +74,9 @@
                     // 4. 버튼 (찜하기, 채팅하기)
 
 
+=======
+                  alert(`제품명 : ${ data.pname }  가격 : ${ data.pprice }`);
+>>>>>>> 0003f061869318a44c750f01208b4d78db0ff6b5
             });
 
             return marker; // 2. 클러스터 저장하기 위해 반복문 밖으로 생성된 마커 반환.
@@ -86,6 +90,10 @@
     AJAX
         $.ajax({  url : "" , method : "" ,  success : (r)=> {}   })
         $.get( url , (r)=> { } )
+<<<<<<< HEAD
 */
 
 }
+=======
+*/
+>>>>>>> 0003f061869318a44c750f01208b4d78db0ff6b5
